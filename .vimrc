@@ -71,6 +71,9 @@ let mapleader = ","
 " Fast saving
 nmap <leader>w :w!<cr>
 
+" use system clipboard register to copy and paste
+set clipboard=unnamed,unnamedplus
+
 " NerdTree mappings
 nnoremap <C-n> :NERDTreeToggle<CR>
 " find on tree??
