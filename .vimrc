@@ -17,9 +17,12 @@ Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
+Plug 'preservim/nerdcommenter'
 
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
+Plug 'joshdick/onedark.vim'
+Plug 'sheerun/vim-polyglot'
 
 " web related plugins
 Plug 'pangloss/vim-javascript'
@@ -103,8 +106,9 @@ set incsearch
 
 " appearance
 syntax enable
-set background=dark
-colorscheme gruvbox
+"set background=dark
+let g:airline_theme='onedark'
+colorscheme onedark
 
 " line number
 set number
@@ -121,5 +125,8 @@ set shiftwidth=2
 set expandtab
 
 let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts=1
+"let g:airline#extensions#tabline#left_sep='>'
+"let g:airline#extensions#tabline#left_alt_sep='>'
 " enable code folding
 " set foldmethod=indent
