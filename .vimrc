@@ -124,9 +124,21 @@ set shiftwidth=2
 " use spaces instead of tab
 set expandtab
 
+set wrap
+set wrapmargin=8
+set linebreak
+
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 "let g:airline#extensions#tabline#left_sep='>'
 "let g:airline#extensions#tabline#left_alt_sep='>'
 " enable code folding
 " set foldmethod=indent
+
+" executing scripts
+augroup rungroup
+  autocmd!
+    "autocmd BufRead,BufNewFile *.go nnoremap <F5> :exec '!go run' shellescape(@%, 1)<cr>
+  autocmd BufRead,BufNewFile *.py map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+  autocmd BufRead,BufNewFile *.py imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+augroup END
