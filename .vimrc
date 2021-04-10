@@ -124,9 +124,18 @@ set shiftwidth=2
 " use spaces instead of tab
 set expandtab
 
+" wrap lines with a margin of 8
 set wrap
 set wrapmargin=8
 set linebreak
+
+
+" code folding settings
+set foldmethod=syntax "fold based on indent
+set foldlevelstart=99
+set foldnestmax=10 "deepest fold is 10 levels
+set nofoldenable "don't fold by default
+set foldlevel=1
 
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
