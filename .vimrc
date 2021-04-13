@@ -18,11 +18,18 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'
+" fuzzy file searching
+Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
+Plug 'junegunn/fzf.vim' 
 
+" appearance related
 Plug 'vim-airline/vim-airline'
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
+
+" latex related
+Plug 'lervag/vimtex'
 
 " web related plugins
 Plug 'pangloss/vim-javascript'
@@ -40,6 +47,8 @@ let g:coc_global_extensions = [
   \ 'coc-eslint',
   \ 'coc-prettier'
   \ ]
+
+" temporary
 
 call plug#end()
 
@@ -70,6 +79,7 @@ nmap <silent> gr <Plug>(coc-references)
 :imap kj <Esc>
 
 let mapleader = ","
+let maplocalleader = "\\"
 
 " Fast saving
 nmap <leader>w :w!<cr>
@@ -151,3 +161,20 @@ augroup rungroup
   autocmd BufRead,BufNewFile *.py map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
   autocmd BufRead,BufNewFile *.py imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
 augroup END
+
+
+" fzf related settings
+
+if isdirectory(".git")
+  " if in a git project, use :GFiles
+  nmap <silent> <leader>t :GitFiles --cached --others --exclude-standard<cr>
+else
+        " otherwise, use :FZF
+  nmap <silent> <leader>t :FZF<cr>
+endif
+
+nmap <silent> <leader>f :Ag<cr>
+nmap <silent> <leader>b :Buffers<cr>
+
+let g:fzf_preview_window = ['right:50%:hidden', '?']
+"let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
