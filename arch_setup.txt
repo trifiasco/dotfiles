@@ -1,0 +1,105 @@
+** if mirrors aren't properly set, or pacman needs
+refreshing - sudo pacman -Syyu
+** gnome-related tweaks:
+	- fix date format
+	- power -> blank screen(never), auto suspend(off)
+1. set up a global keyboard shortcut to launch terminal
+  - give a name
+  - command: gnome-terminal
+  - shortcut: Ctrl+Alt+t
+
+2. vim
+  - pacman -S gvim
+  - gvim comes with clipboard support
+
+3. web browser
+  - install firefox: pacman -S firefox
+  - install qutebrowser: pacman -S qutebrowser
+
+4. install git - pacman -S git
+ - set global name and email : global config - `git config --global user.email "mail"` and `git config --global user.name "name"`
+	- clone the dotfiles repository
+	- for ssh - 
+	```
+	ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+	cd ~/.ssh -> copy the .pub and paste it into gitlab/github
+	```
+5. Zsh and oh-myzsh:
+	- first install zsh and zsh-completions: `sudo pacman -S
+		zsh zsh-completions`
+		- run `zsh` and enter `1` to go to main config menu
+			- keep the default history options.
+			- keep the default completions system.
+			- change the default keybinding to `vi`
+			- keep the default for number 4(common shell options)
+
+		- move the nvm export lines from `bashrc` if nvm is
+			installed before.
+		- add following to .zshrc - 
+		```
+		autoload -Uz promptinit
+		promptinit
+		```
+		- to persist changes, run - `source .zshrc`
+	- Install `oh-my-zsh`:
+		- run - `sh -c "$(curl -fsSL
+			https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+		- select zsh to default shell
+		- update the OMZ with - `omz update`
+		- change the theme in .zshrc - `gnzh` or `powerlevel10k`
+			- [install powerlevel10k from here](https://github.com/romkatv/powerlevel10k#oh-my-zsh)
+			- add theme in .zshrc -
+				`powerlevel10k/powerlevel10k`
+			- save and source - this will invoke the config
+				prompt.
+		- to enable a plugin check if the plugin exists in the
+			`.oh-my-zsh/plugins` directory, if so add it in the
+			.zshrc plugins line
+
+		- if a plugin is not already installed:
+			- clone the repository into ohmyzsh's plugins
+				directory:
+				```
+					git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+				```
+			- then just add the plugin name in the zshrc plugins
+				line
+			- install `neofetch` - sudo pacman -S neofetch
+			- add neofetch to the top of .zshrc
+
+	- Plugins to install:
+	```
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+
+plugins=([...] zsh-syntax-highlighting zsh-autosuggestions)
+	```
+
+6. Install nvm
+  - nvm (node & beyond)
+	- Run following commands in that order
+	```
+	curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash
+	export NVM_DIR="$HOME/.nvm"    
+	[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+	[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+	
+	```
+	- download latest node - `nvm install node`
+	- Original [repo](https://github.com/nvm-sh/nvm)
+
+7. Update vim
+  - clone vim-plug repository
+  - make a .vimrc
+  - copy everything from dotfiles repo vimrc to local vimrc
+  - open vim and :PluginInstall
+	- Install a nerd-font to properly show devicons:
+		- go
+			[here](https://github.com/ryanoasis/nerd-fonts#font-installation)
+			and download a font-family from latest release(Hack
+			or Fira code prefereably)
+		- extract the font and place it under
+		`.local/share/fonts`
+		- then from `gnome-tweaks` select the font
