@@ -96,6 +96,78 @@ guake
 	- download latest node - `nvm install node`
 	- Original [repo](https://github.com/nvm-sh/nvm)
 
+# Zsh and oh-myzsh:
+	**prefereably it should be set up before
+	installing nvm**
+
+	- install zsh with -
+		`sudo apt install zsh`
+
+	- run `zsh` and enter `1` to go to main config menu
+		- keep the default history options.
+		- keep the default completions system.
+		- change the default keybinding to `vi`
+		- keep the default for number 4(common shell options)
+
+	- move the nvm export lines from `bashrc` if nvm is
+		installed before.
+	- add following to .zshrc - 
+	```
+	  autoload -Uz promptinit
+	  promptinit
+
+
+    # NVM exports
+		export NVM_DIR="$HOME/.nvm"
+		[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+		[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+    # for tmuxinator exposing editor is required
+		export EDITOR=vim
+
+    # dotfiles git repo alias
+	  alias dotfiles='/usr/bin/git --git-dir=/home/trifiasco/.dotfiles/ --work-tree=/home/trifiasco'
+	```
+	- to persist changes, run - `source .zshrc`
+
+## oh-my-zsh:
+	- Install ohmyzsh - `sh -c "$(curl -fsSL
+		https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
+
+	- select zsh to default shell
+	- update the OMZ with - `omz update`
+	 
+	- change the theme in .zshrc - `gnzh` or `powerlevel10k`
+		- [install powerlevel10k from here](https://github.com/romkatv/powerlevel10k#oh-my-zsh)
+		- add theme in .zshrc -
+			`powerlevel10k/powerlevel10k`
+		- save and source - this will invoke the config
+			prompt.
+	- to enable a plugin check if the plugin exists in the
+		`.oh-my-zsh/plugins` directory, if so add it in the
+		.zshrc plugins line
+
+	- if a plugin is not already installed:
+		- clone the repository into ohmyzsh's plugins
+			directory:
+			```
+				git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+			```
+		- then just add the plugin name in the zshrc plugins
+			line
+		- install `neofetch` - sudo pacman -S neofetch
+		- add neofetch to the top of .zshrc
+
+	- Plugins to install:
+	```
+	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+
+plugins=([...] zsh-syntax-highlighting zsh-autosuggestions)
+
+**REMEMBER to restart to take effect of the changes**
 
 
 # Need to do
