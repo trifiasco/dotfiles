@@ -148,6 +148,7 @@ set nofoldenable "don't fold by default
 set foldlevel=1
 
 let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#fnamemod=':t'
 let g:airline_powerline_fonts=1
 "let g:airline#extensions#tabline#left_sep='>'
 "let g:airline#extensions#tabline#left_alt_sep='>'
@@ -176,5 +177,9 @@ endif
 nmap <silent> <leader>f :Ag<cr>
 nmap <silent> <leader>b :Buffers<cr>
 
-let g:fzf_preview_window = ['right:50%:hidden', '?']
-"let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
+let g:fzf_preview_window = ['right:50%', '?']
+" let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.5, 'highlight': 'Comment' } }
+
+
+" fugitive related settings
+nmap <silent> <leader>gs :Gstatus<cr>
