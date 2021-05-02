@@ -22,7 +22,12 @@ refreshing - sudo pacman -Syyu
 	- for ssh - 
 	```
 	ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_rsa
 	cd ~/.ssh -> copy the .pub and paste it into gitlab/github
+
+	> test connection
+	ssh -T git@github.com
 	```
 5. Zsh and oh-myzsh:
 	- first install zsh and zsh-completions: `sudo pacman -S
@@ -103,3 +108,21 @@ plugins=([...] zsh-syntax-highlighting zsh-autosuggestions)
 		- extract the font and place it under
 		`.local/share/fonts`
 		- then from `gnome-tweaks` select the font
+
+
+8. Tmux and Tmuxinator
+	- install tmux : `pacman -S tmux`
+	- copy the .tmux.conf from repo to home directory
+
+	- Now install rvm and ruby (needed for Tmuxinator)-
+		- follow the [arch wiki](https://wiki.archlinux.org/title/RVM#Installing_RVM)
+		```
+			curl -L get.rvm.io > rvm-install
+			bash < ./rvm-install
+		```
+	- enable run command as login shell in
+		terminal>preference>profile>command
+	- close and reopen the terminal and check rvm version
+	- run - `rvm user gemsets`
+	- install a ruby - `rvm install ruby`
+	- make sure $EDITOR is set in .zshrc or .bashrc

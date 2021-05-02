@@ -82,7 +82,12 @@ guake
 	-- for ssh - 
 	```
 	ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+	eval "$(ssh-agent -s)"
+	ssh-add ~/.ssh/id_rsa
 	cd ~/.ssh -> copy the .pub and paste it into gitlab/github
+
+	> test connection
+	ssh -T git@github.com
 	```
   - nvm (node & beyond)
 	- Run following commands in that order
