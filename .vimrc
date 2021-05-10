@@ -24,6 +24,7 @@ Plug 'junegunn/fzf.vim'
 
 " appearance related
 Plug 'vim-airline/vim-airline'
+Plug 'edkolev/tmuxline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
@@ -183,3 +184,5 @@ let g:fzf_preview_window = ['right:50%', '?']
 
 " fugitive related settings
 nmap <silent> <leader>gs :Gstatus<cr>
+nmap <silent> <leader>gb :Gblame<cr>
+nmap <silent> <leader>gv :Gvdiff<cr>
