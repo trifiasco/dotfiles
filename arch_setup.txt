@@ -100,6 +100,7 @@ plugins=([...] zsh-syntax-highlighting zsh-autosuggestions)
   - make a .vimrc
   - copy everything from dotfiles repo vimrc to local vimrc
   - open vim and :PluginInstall
+	- install silver searcher - `pacman -S the_silver_searcher`
 	- Install a nerd-font to properly show devicons:
 		- go
 			[here](https://github.com/ryanoasis/nerd-fonts#font-installation)
@@ -126,3 +127,4 @@ plugins=([...] zsh-syntax-highlighting zsh-autosuggestions)
 	- run - `rvm user gemsets`
 	- install a ruby - `rvm install ruby`
 	- make sure $EDITOR is set in .zshrc or .bashrc
+	- run - `gem install tmuxinator`
