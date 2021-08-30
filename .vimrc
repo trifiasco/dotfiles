@@ -24,9 +24,11 @@ Plug 'junegunn/fzf.vim'
 
 " appearance related
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'edkolev/tmuxline.vim'
 Plug 'morhetz/gruvbox'
 Plug 'joshdick/onedark.vim'
+Plug 'ayu-theme/ayu-vim'
 Plug 'sheerun/vim-polyglot'
 
 " latex related
@@ -117,9 +119,11 @@ set incsearch
 
 " appearance
 syntax enable
-"set background=dark
-let g:airline_theme='onedark'
-colorscheme onedark
+set background=dark
+let g:airline_theme='night_owl'
+"set termguicolors
+let ayucolor="dark"
+colorscheme ayu
 
 " line number
 set number
@@ -139,6 +143,8 @@ set expandtab
 set wrap
 set wrapmargin=8
 set linebreak
+
+set autoread
 
 
 " code folding settings
