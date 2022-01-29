@@ -124,6 +124,13 @@ return require('packer').startup(function(use)
       requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  --> non lua plugins - TODO: replace with plugins written in Lua.
+
+  use {
+      {'tpope/vim-fugitive'},
+      {'tpope/vim-surround'},
+      {'airblade/vim-gitgutter'},
+  }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
