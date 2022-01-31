@@ -16,6 +16,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-dispatch'
 Plug 'jiangmiao/auto-pairs'
 Plug 'preservim/nerdcommenter'
 " fuzzy file searching
@@ -33,6 +34,7 @@ Plug 'sheerun/vim-polyglot'
 
 " latex related
 Plug 'lervag/vimtex'
+Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 
 " web related plugins
 Plug 'pangloss/vim-javascript'
@@ -123,7 +125,7 @@ set background=dark
 let g:airline_theme='night_owl'
 "set termguicolors
 let ayucolor="dark"
-colorscheme ayu
+colorscheme onedark
 
 " line number
 set number
@@ -133,8 +135,8 @@ set relativenumber
 set smartindent
 set autoindent
 
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 
 " use spaces instead of tab
 set expandtab
@@ -162,12 +164,21 @@ let g:airline_powerline_fonts=1
 " enable code folding
 " set foldmethod=indent
 
+:let $CXXFLAGS='-std=c++0x -Wall -pedantic'
 " executing scripts
 augroup rungroup
   autocmd!
     "autocmd BufRead,BufNewFile *.go nnoremap <F5> :exec '!go run' shellescape(@%, 1)<cr>
-  autocmd BufRead,BufNewFile *.py map <buffer> <F9> :w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+  autocmd FileType python let b:dispatch = 'python3 %'
+  autocmd BufRead,BufNewFile *.py map <buffer> <silent> <leader>r :w<CR>:Dispatch<CR>
+
+  autocmd BufRead,BufNewFile *.py map <buffer> <F9> :w<CR>:exec '!clear;python3' shellescape(@%, 1)<CR>
+  " autocmd BufRead,BufNewFile *.py map <buffer> <F9> :w<CR>:!clear;python3 %<CR>
   autocmd BufRead,BufNewFile *.py imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
+  "autocmd filetype cpp nnoremap <F9> :w<CR> :!clear<CR> :!g++ % -o %< && %<<CR>
+  autocmd BufRead,BufNewFile *.cpp map <buffer> <F9> :w<CR>: !g++ -std=c++11 -Dtrifiasco % -o %:r && ./%:r <CR>
+  autocmd BufRead,BufNewFile *.cpp imap <buffer> <F9> <esc>:w<CR>:!g++ -std=c++11 % -o %:r && ./%:r <CR>
 augroup END
 
 
@@ -192,3 +203,16 @@ let g:fzf_preview_window = ['right:50%', '?']
 nmap <silent> <leader>gs :Gstatus<cr>
 nmap <silent> <leader>gb :Gblame<cr>
 nmap <silent> <leader>gv :Gvdiff<cr>
+
+
+autocmd Filetype tex setl updatetime=1
+let g:livepreview_previewer = 'open -a Preview'
+let g:vimtex_compiler_latexmk = { 
+        \ 'executable' : 'latexmk',
+        \ 'options' : [ 
+        \   '-xelatex',
+        \   '-file-line-error',
+        \   '-synctex=1',
+        \   '-interaction=nonstopmode',
+        \ ],
+        \}
