@@ -1,34 +1,27 @@
-# Getting started
-- create a `.dotfiles` folder
-```
-  git init --bare $HOME/.dotfiles
-```
-- create an alias
-```
-echo "alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" >> $HOME/.bashrc
-```
-- set git status to hide untracked files
-```
-dotfiles config --local status.showUntrackedFiles no
-```
+# dotfiles
+Repository containing dotfiles
 
-# Usage
-```
-dotfiles status
-dotfiles add .vimrc
-dotfiles commit -m "Add .vimrc"
-dotfiles push -u origin main
-```
+# Dependencies
+Make sure the following are installed -
+- [git](https://git-scm.com/) - well..
+- [zsh](https://www.zsh.org/) - shell of my choice
+- [antigen](https://github.com/zsh-users/antigen) - zsh plugin manager
+- [tmux](https://github.com/tmux) - terminal multiplexer
+- [tmuxinator](https://github.com/tmuxinator/tmuxinator) - tmux session manager
+- [neovim](https://neovim.io/) - vim improved
+- [vim](https://www.vim.org/) - vi improved
 
 # Setting up environment in a new computer
-- Make sure you have following things installed -
-  - git
-
 - Clone the repository - 
 ```
-git clone --bare <url> $HOME/.dotfiles
+git@github.com:trifiasco/dotfiles.git
 ```
-- Add the alias in the current shell scope
-- checkout the repository
+- cd into the repository.
+- run - `./install`
 
-NOTE - Error may be thrown in case of files that are already there ( example .bashrc ), in that case just delete that file or back them up somewhere.
+
+# TODOs:
+- Add antigen as a submodule to be automatically installed
+- Add setup scripts for the other dependencies
+- Cleanup - remove dead and obsolete dotfiles
+- Check nvim related TODOs in [migration-to-nvim-with-lua](./migration-to-nvim-with-lua.md)
