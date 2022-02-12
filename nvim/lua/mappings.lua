@@ -28,6 +28,8 @@ nnoremap('<leader>w', ':w!<cr>')
 nnoremap('<localleader>q', ':bd<cr>')
 -- opens quickfix list
 nnoremap('<localleader>c', ':copen<cr>')
+-- closes quickfix list
+nnoremap('<localleader>x', ':cclose<cr>')
 
 -- toggle highlight last search
 nnoremap('<leader>n', ':set hlsearch!<cr>')
@@ -36,7 +38,9 @@ nnoremap('<leader>n', ':set hlsearch!<cr>')
 
 --> nvim-tree
 -- Find is more useful than toggle. Need to check if both can be configured with one keybinding
-nnoremap('<C-n>', ':NvimTreeFindFile<CR>')
+nnoremap('<C-n>', ':NvimTreeToggle<CR>')
+-- local nvim_tree = require('nvim-tree')
+-- map('n', "<C-m>", [[<CMD>lua nvim_tree.win_open() ? nvim_tree.toggle() : nvim_tree.<CR>]], {noremap = true})
 -- nnoremap('<C-n>', ':NvimTreeToggle<CR>')
 
 --> Navigator - vim-tmux-navigator
@@ -68,3 +72,22 @@ map('n', '<leader>f', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]],
 map('n', '<leader>gs', '<CMD> Git<CR>', opts)
 map('n', '<leader>gb', '<CMD> Git blame<CR>', opts)
 map('n', '<leader>gv', '<CMD> Gvdiffsplit<CR>', opts)
+
+-- rungroup
+-- nnoremap('n', '<leader>r', ":update<CR>:exec '!python3' shellescape(@%, 1)<CR>")
+vim.cmd[[
+augroup rungroup
+  autocmd!
+    "autocmd BufRead,BufNewFile *.go nnoremap <F5> :exec '!go run' shellescape(@%, 1)<cr>
+  " autocmd FileType python let b:dispatch = 'python3 %'
+  " autocmd BufRead,BufNewFile *.py map <buffer> <silent> <leader>r :update<CR>:Dispatch<CR>
+
+  autocmd BufRead,BufNewFile *.py map <buffer> <silent> <leader>r :update<CR>:exec '!python3' shellescape(@%, 1)<CR>
+  " " autocmd BufRead,BufNewFile *.py map <buffer> <F9> :w<CR>:!clear;python3 %<CR>
+  " autocmd BufRead,BufNewFile *.py imap <buffer> <F9> <esc>:w<CR>:exec '!python3' shellescape(@%, 1)<CR>
+
+  "autocmd filetype cpp nnoremap <F9> :w<CR> :!clear<CR> :!g++ % -o %< && %<<CR>
+  " autocmd BufRead,BufNewFile *.cpp map <buffer> <F9> :w<CR>: !g++ -std=c++11 -Dtrifiasco % -o %:r && ./%:r <CR>
+  " autocmd BufRead,BufNewFile *.cpp imap <buffer> <F9> <esc>:w<CR>:!g++ -std=c++11 % -o %:r && ./%:r <CR>
+augroup END
+]]

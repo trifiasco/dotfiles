@@ -49,9 +49,13 @@ return require('packer').startup(function(use)
     config = function()
         require'nvim-tree'.setup {
             view = {
-                side = 'right',
+                side = 'left',
                 width = 70
-            }
+            },
+			update_focused_file = {
+				enable = true,
+				update_cwd = true
+			}
         }
         end
   }
@@ -124,10 +128,17 @@ return require('packer').startup(function(use)
       requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+  -- code runner plugin
+ --  use {
+	-- 	'is0n/jaq-nvim',
+ --    	config = [[require('plugin-configs.code-runner')]]
+	-- }
+
   --> non lua plugins - TODO: replace with plugins written in Lua.
 
   use {
       {'tpope/vim-fugitive'},
+      -- {'tpope/vim-dispatch'},
       {'tpope/vim-surround'},
       {'airblade/vim-gitgutter'},
   }
