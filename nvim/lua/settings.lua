@@ -24,9 +24,13 @@ o.smartcase = true
 o.tabstop = 4
 o.updatetime = 250
 
+o.backup = false
+o.wb = false
+
 -- buffer local options - lexicographically sorted
 bo.expandtab = true
 bo.wrapmargin = 8
+bo.swapfile = false
 
 -- window local options - lexicographically sorted
 wo.colorcolumn = '80'
