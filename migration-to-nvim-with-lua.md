@@ -25,6 +25,17 @@
     - nvim-notify: gui styled notification
     - easy-motion type plugins: hop, train etc
     - debugging and testing plugins
+		- [nvim-dap](https://github.com/mfussenegger/nvim-dap)
+		- [vim-ulttest](https://github.com/rcarriga/vim-ultest)
+
+	- build system and code-runner: Need some R&D on build-system and code-runner
+		- current system - using a autocommand group
+		- possible alternatives
+			- dispatch with custom compiler and ftplugin, then can use one `:Make` to build and run
+			- use a code-runner system:
+				- [yabs](https://github.com/pianocomposer321/yabs.nvim)
+				- [code-runner](https://github.com/CRAG666/code_runner.nvim)
+				- [jaq-nvim](https://github.com/is0n/jaq-nvim)
 
 - Plugins(added in nvim) that need further exploration:
     - treesitter - textobjects, formatting, playground etc.
