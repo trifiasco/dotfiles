@@ -30,11 +30,20 @@ end
 
 local servers = {
 	"bashls",
-	"pyright",
+	"pylsp",
 	"tsserver",
 	"emmet_ls",
 	"ltex",
 	"eslint",
+}
+
+local enhance_server_opts = {
+    ["pylsp"] = function(opts)
+        opts.settings = {
+            configurationSources = {"flake8"},
+            formatCommand = {"black"}
+        }
+    end,
 }
 
 ---@diagnostic disable-next-line: undefined-global
@@ -57,6 +66,10 @@ lsp_installer.on_server_ready(function(server)
 		on_attach = on_attach,
 		capabilities = capabilities,
 	}
+
+    if enhance_server_opts[server.name] then
+        enhance_server_opts[server.name](default_opts)
+    end
 
 	server:setup(default_opts)
 end)
