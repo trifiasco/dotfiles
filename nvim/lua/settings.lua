@@ -41,3 +41,4 @@ wo.signcolumn = 'yes'
 wo.wrap = true
 
 -- global settings
+vim.diagnostic.config({virtual_text = false})
