@@ -1,7 +1,7 @@
 local nightfox = require('nightfox')
 
 nightfox.setup({
-    fox = 'nordfox', -- change the colorscheme
+    fox = 'nightfox', -- change the colorscheme
     styles = {
         comments = 'italic',
         functions = 'italic',
