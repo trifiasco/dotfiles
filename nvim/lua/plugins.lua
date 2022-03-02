@@ -133,6 +133,11 @@ return require('packer').startup(function(use)
       requires = { {'nvim-lua/plenary.nvim'} }
   }
 
+	use {
+		{'renerocksai/telekasten.nvim', config = [[require('plugin-configs.telekasten')]]},
+		{'renerocksai/calendar-vim'}
+	}
+
   -- code runner plugin
  --  use {
 	-- 	'is0n/jaq-nvim',
