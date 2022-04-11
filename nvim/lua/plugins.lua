@@ -67,7 +67,7 @@ return require('packer').startup(function(use)
 
 
   use {
-    'EdenEast/nightfox.nvim', config = [[require('plugin-configs.theme')]]
+    'EdenEast/nightfox.nvim', tag = "v1.0.0", config = [[require('plugin-configs.theme')]]
   }
 
   use {
@@ -83,14 +83,14 @@ return require('packer').startup(function(use)
       end
   }
 
-  use { 'sunjon/shade.nvim',
-    config = function()
-        require'shade'.setup {
-            overlay_opacity = 30,
-            opacity_step = 1
-        }
-        end
-  }
+  -- use { 'sunjon/shade.nvim',
+  --   config = function()
+  --       require'shade'.setup {
+  --           overlay_opacity = 90,
+  --           opacity_step = 1
+  --       }
+  --       end
+  -- }
   
   use {
       'nvim-treesitter/nvim-treesitter',

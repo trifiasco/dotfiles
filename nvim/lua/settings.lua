@@ -22,13 +22,14 @@ o.ignorecase = true
 o.shiftwidth = 4
 o.smartcase = true
 o.tabstop = 4
+o.softtabstop = 4
+o.expandtab = true
 o.updatetime = 250
 
 o.backup = false
 o.wb = false
 
 -- buffer local options - lexicographically sorted
-bo.expandtab = true
 bo.wrapmargin = 8
 bo.swapfile = false
 
