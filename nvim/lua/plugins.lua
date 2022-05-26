@@ -148,6 +148,7 @@ return require('packer').startup(function(use)
 
   use {
       {'tpope/vim-fugitive'},
+      -- {'edkolev/tmuxline.vim'},
       -- {'tpope/vim-dispatch'},
       {'tpope/vim-surround'},
       {'airblade/vim-gitgutter'},

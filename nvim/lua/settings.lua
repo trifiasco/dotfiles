@@ -25,6 +25,7 @@ o.tabstop = 4
 o.softtabstop = 4
 o.expandtab = true
 o.updatetime = 250
+o.termguicolors = true
 
 o.backup = false
 o.wb = false
