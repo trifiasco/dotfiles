@@ -1,0 +1,9 @@
+# Font configuration (changes require restart)
+font:
+  # current choice of font is Hack Nerd
+  # check if font is available by running:
+  # fc-list | grep Nerd | grep Hack
+  # Style can be specified to pick a specific face.
+  normal:
+    family: Hack Nerd Font
+    style: Regular

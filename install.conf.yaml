@@ -1,5 +1,6 @@
 - defaults:
     link:
+      create: true
       relink: true
       force: true
 
@@ -10,6 +11,7 @@
     ~/.vimrc: .vimrc
     ~/.zshrc: .zshrc
     ~/.config/nvim: nvim
+    ~/.config/alacritty/alacritty.yml: alacritty.yml
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

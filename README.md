@@ -4,6 +4,7 @@ Repository containing dotfiles
 # Dependencies
 Make sure the following are installed -
 - [git](https://git-scm.com/) - well..
+- [alacritty](https://github.com/alacritty/alacritty) - terminal emulator
 - [zsh](https://www.zsh.org/) - shell of my choice
 - [antigen](https://github.com/zsh-users/antigen) - zsh plugin manager
 - [tmux](https://github.com/tmux) - terminal multiplexer
