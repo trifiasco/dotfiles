@@ -25,6 +25,8 @@ local function vnoremap(left, right)
     map('v', left, right, { noremap = true })
 end
 
+
+nnoremap('<leader>r', ':PackerSync<CR>')
 -- fast saving
 nnoremap('<leader>w', ':w!<cr>')
 -- closes a buffer
