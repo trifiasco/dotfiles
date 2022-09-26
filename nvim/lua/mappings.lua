@@ -118,4 +118,4 @@ local autoCommands = {
     }
 }
 
-M.nvim_create_augroups(autoCommands)
+-- M.nvim_create_augroups(autoCommands)
