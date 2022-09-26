@@ -140,7 +140,7 @@ return require('packer').startup(function(use)
     use {
       "kevinhwang91/nvim-ufo",
       opt = true,
-      event = { "BufReadPre" },
+      event = { "BufRead" },
       wants = { "promise-async" },
       requires = "kevinhwang91/promise-async",
       config = function()
