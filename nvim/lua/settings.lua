@@ -30,6 +30,13 @@ o.termguicolors = true
 o.backup = false
 o.wb = false
 
+-- fold settings
+-- needed for ufo plugin to work
+o.foldcolumn = "1"
+o.foldlevel = 99
+o.foldlevelstart = -1
+o.foldenable = true
+
 -- buffer local options - lexicographically sorted
 bo.wrapmargin = 8
 bo.swapfile = false
