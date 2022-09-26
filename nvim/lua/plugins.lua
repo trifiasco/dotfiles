@@ -137,6 +137,22 @@ return require('packer').startup(function(use)
 		{'renerocksai/telekasten.nvim', config = [[require('plugin-configs.telekasten')]]},
 		{'renerocksai/calendar-vim'}
 	}
+    use {
+      "kevinhwang91/nvim-ufo",
+      opt = true,
+      event = { "BufReadPre" },
+      wants = { "promise-async" },
+      requires = "kevinhwang91/promise-async",
+      config = function()
+        require("ufo").setup {
+          provider_selector = function(bufnr, filetype)
+            return { "lsp", "indent" }
+          end,
+        }
+        vim.keymap.set("n", "zR", require("ufo").openAllFolds)
+        vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
+      end,
+    }
 
   -- code runner plugin
  --  use {
@@ -148,10 +164,12 @@ return require('packer').startup(function(use)
 
   use {
       {'tpope/vim-fugitive'},
+      -- {'sotte/presenting.vim'},
       -- {'edkolev/tmuxline.vim'},
       -- {'tpope/vim-dispatch'},
       {'tpope/vim-surround'},
       {'airblade/vim-gitgutter'},
+      {'jbyuki/nabla.nvim'}
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
