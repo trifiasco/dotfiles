@@ -161,6 +161,17 @@ return require('packer').startup(function(use)
       end,
     }
 
+    -- Super fast buffer jump
+    use {
+      "phaazon/hop.nvim",
+      event = "VimEnter",
+      config = function()
+        vim.defer_fn(function()
+          require("plugin-configs.nvim_hop")
+        end, 2000)
+      end,
+    }
+
   -- code runner plugin
  --  use {
 	-- 	'is0n/jaq-nvim',
