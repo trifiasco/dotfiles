@@ -175,6 +175,7 @@ return require('packer').startup(function(use)
       -- {'edkolev/tmuxline.vim'},
       -- {'tpope/vim-dispatch'},
       {'tpope/vim-surround'},
+      {'tpope/vim-repeat'},
       {'airblade/vim-gitgutter'},
       {'jbyuki/nabla.nvim'}
   }
