@@ -53,6 +53,8 @@ function M.setup()
   require("luasnip.loaders.from_snipmate").lazy_load()
 
   ls.filetype_extend("all", { "_" })
+  ls.filetype_extend("telekasten", {"markdown"})
+  ls.filetype_extend("telekasten", {"tex"})
 
   -- Create new snippets
   create_snippets()
