@@ -79,6 +79,11 @@ map('n', '<leader>gb', '<CMD> Git blame<CR>', opts)
 map('n', '<leader>gv', '<CMD> Gvdiffsplit<CR>', opts)
 
 map('n', '<leader>p', [[<cmd>lua require('nabla').popup()<CR>]], opts)
+
+--sniprun
+map('v', '<leader>e', '<Plug>SnipRun', {silent = true})
+map('n', '<leader>e', '<Plug>SnipRunOperator', {silent = true})
+map('n', '<leader>ee', '<Plug>SnipRun', {silent = true})
 -- rungroup
 -- nnoremap('n', '<leader>r', ":update<CR>:exec '!python3' shellescape(@%, 1)<CR>")
 vim.cmd[[

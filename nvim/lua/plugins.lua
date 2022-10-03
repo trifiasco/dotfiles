@@ -172,7 +172,14 @@ return require('packer').startup(function(use)
       end,
     }
 
-  -- code runner plugin
+    -- code runner plugin
+    use { 
+        'michaelb/sniprun', 
+        run = 'bash ./install.sh',
+        config = function()
+            require("plugin-configs.sniprun").setup()
+        end,
+    }
  --  use {
 	-- 	'is0n/jaq-nvim',
  --    	config = [[require('plugin-configs.code-runner')]]
