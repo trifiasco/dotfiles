@@ -107,7 +107,9 @@ return require('packer').startup(function(use)
 
   use {
     {'neovim/nvim-lspconfig'},
-    {'williamboman/nvim-lsp-installer', config = [[require('plugin-configs.lsp-installer-config')]]},
+    -- {'williamboman/nvim-lsp-installer', config = [[require('plugin-configs.lsp-installer-config')]]},
+    { "williamboman/mason.nvim" },
+    { "williamboman/mason-lspconfig.nvim", config = [[require('plugin-configs.mason-lspconfig')]] },
     {'hrsh7th/cmp-nvim-lsp'}
   }
 
@@ -173,13 +175,13 @@ return require('packer').startup(function(use)
     }
 
     -- code runner plugin
-    use { 
-        'michaelb/sniprun', 
-        run = 'bash ./install.sh',
-        config = function()
-            require("plugin-configs.sniprun").setup()
-        end,
-    }
+    -- use { 
+    --     'michaelb/sniprun', 
+    --     run = 'bash ./install.sh',
+    --     config = function()
+    --         require("plugin-configs.sniprun").setup()
+    --     end,
+    -- }
  --  use {
 	-- 	'is0n/jaq-nvim',
  --    	config = [[require('plugin-configs.code-runner')]]
@@ -195,7 +197,9 @@ return require('packer').startup(function(use)
       {'tpope/vim-surround'},
       {'tpope/vim-repeat'},
       {'airblade/vim-gitgutter'},
-      {'jbyuki/nabla.nvim'}
+      {'jbyuki/nabla.nvim'},
+      {'psf/black', branch = 'stable'},
+      {'github/copilot.vim', config = [[require('plugin-configs.copilot')]]}
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins

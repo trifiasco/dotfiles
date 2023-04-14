@@ -11,7 +11,7 @@ hop.setup {
 }
 
 -- set(mode, key, action, opts=dict())
-keymap.set({ "n", "v", "o" }, "f", "", {
+keymap.set({ "n", "v", "o" }, "F", "", {
   silent = true,
   noremap = true,
   callback = function()

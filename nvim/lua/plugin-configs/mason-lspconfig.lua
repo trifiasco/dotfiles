@@ -1,5 +1,32 @@
-local lsp_installer = require("nvim-lsp-installer").setup {}
+local mason = require("mason").setup{}
+local mason_lspconfig = require("mason-lspconfig")
 local lspconfig = require("lspconfig")
+
+local servers = {
+    pylsp = {
+        settings = {
+            configurationSources = {"flake8"},
+            formatCommand = {"black"}
+        },
+        pylsp = {
+            plugins = {
+                flake8 = {
+                    enabled = true,
+                    maxLineLength = 88
+                },
+                black = {
+                    enabled = true,
+                    lineLength = 88
+                }
+            }
+        }
+    },
+	bashls = {},
+	tsserver = {},
+	emmet_ls = {},
+	ltex = {},
+	eslint = {},
+}
 
 local on_attach = function(client, bufnr)
 	local function buf_set_keymap(...)
@@ -29,39 +56,6 @@ local on_attach = function(client, bufnr)
 	buf_set_keymap("n", "<leader>lf", ":lua vim.lsp.buf.format()<CR>", opts) --> formats the current buffer
 end
 
-lspconfig.pylsp.setup{
-  settings = {
-    pylsp = {
-        configurationSources = {"flake8"},
-        formatCommand = {"black"}
-      -- plugins = {
-      --   pycodestyle = {
-      --     ignore = {'W391'},
-      --     maxLineLength = 88
-      --   }
-      -- }
-    }
-  }
-}
-
-local servers = {
-	"bashls",
-	"pylsp",
-	"tsserver",
-	"emmet_ls",
-	"ltex",
-	"eslint",
-}
-
-local enhance_server_opts = {
-    ["pylsp"] = function(opts)
-        opts.settings = {
-            configurationSources = {"flake8"},
-            formatCommand = {"black"}
-        }
-    end,
-}
-
 ---@diagnostic disable-next-line: undefined-global
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -71,30 +65,17 @@ capabilities.textDocument.foldingRange = {
 }
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
--- for _, name in pairs(servers) do
--- 	local server_is_found, server = lsp_installer.get_server(name)
--- 	if server_is_found then
--- 		if not server:is_installed() then
--- 			print("Installing " .. name)
--- 			server:install()
--- 		end
--- 	end
--- end
+mason_lspconfig.setup{
+    ensure_installed = vim.tbl_keys(servers),
+}
 
-for _, server in pairs(servers) do
-  lspconfig[server].setup { on_attach = on_attach, capabilities = capabilities }
-end
+mason_lspconfig.setup_handlers {
+  function(server_name)
+    require('lspconfig')[server_name].setup {
+      capabilities = capabilities,
+      on_attach = on_attach,
+      settings = servers[server_name],
+    }
+  end,
+}
 
--- lsp_installer.on_server_ready(function(server)
--- 	-- Specify the default options which we'll use to setup all servers
--- 	local default_opts = {
--- 		on_attach = on_attach,
--- 		capabilities = capabilities,
--- 	}
---
---     if enhance_server_opts[server.name] then
---         enhance_server_opts[server.name](default_opts)
---     end
---
--- 	server:setup(default_opts)
--- end)

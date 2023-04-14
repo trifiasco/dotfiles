@@ -21,6 +21,9 @@ cmp.setup({
 			require("luasnip").lsp_expand(args.body)
 		end,
 	},
+    completion = {
+        autocomplete = false,
+    },
 	mapping = {
 		["<C-p>"] = cmp.mapping.select_prev_item(),
 		["<C-n>"] = cmp.mapping.select_next_item(),
