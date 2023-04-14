@@ -199,6 +199,7 @@ return require('packer').startup(function(use)
       {'airblade/vim-gitgutter'},
       {'jbyuki/nabla.nvim'},
       {'psf/black', branch = 'stable'},
+      {'lervag/vimtex'},
       {'github/copilot.vim', config = [[require('plugin-configs.copilot')]]}
   }
   -- Automatically set up your configuration after cloning packer.nvim
