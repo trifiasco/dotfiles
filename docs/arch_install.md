@@ -12,7 +12,7 @@
   - increase number of processor.
   - increase video memory under display>screen.
   - point to the iso under storage.
-- Click start.
+- **Click start**.
 
 ## Arch installation
 ### Setting up the networking:

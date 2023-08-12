@@ -7,11 +7,11 @@
 - clean: ['~']
 
 - link:
-    ~/.tmux.conf: .tmux.conf
-    ~/.vimrc: .vimrc
-    ~/.zshrc: .zshrc
-    ~/.config/nvim: nvim
-    ~/.config/alacritty/alacritty.yml: alacritty.yml
+    ~/.tmux.conf: dotfiles/tmux.conf
+    ~/.zshrc: dotfiles/zshrc
+    ~/.config/nvim: dotfiles/nvim
+    ~/.config/kitty: dotfiles/kitty
+    ~/.config/alacritty/alacritty.yml: dotfiles/alacritty.yml
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
