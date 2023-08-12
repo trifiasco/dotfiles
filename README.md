@@ -30,4 +30,5 @@ git@github.com:trifiasco/dotfiles.git
 - Add antigen as a submodule to be automatically installed
 - Add setup scripts for the other dependencies
 - Cleanup - remove dead and obsolete dotfiles
-- Check nvim related TODOs in [migration-to-nvim-with-lua](./migration-to-nvim-with-lua.md)
+    - .vimrc - not maintained anymore
+- Check nvim related TODOs in [docs/nvim-todos.md](./docs/nvim-todos.md)
