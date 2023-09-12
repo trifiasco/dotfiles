@@ -158,6 +158,13 @@ return {
             })
         end,
     },
+
+    -- task runner
+    {
+        "stevearc/overseer.nvim",
+        opts = {},
+    },
+
     -- Git Related
     -- gitsign + lazygit in tmux maybe??
     { "tpope/vim-fugitive" },
@@ -168,5 +175,5 @@ return {
     -- vimtex
     --
     -- colors and themes
-    {"morhetz/gruvbox"}
+    { "morhetz/gruvbox" },
 }

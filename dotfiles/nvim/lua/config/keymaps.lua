@@ -18,6 +18,8 @@ nmap {'<leader>w', ':w!<CR>'}
 nmap{'<localleader>q', ':bd<CR>'}
 
 nmap{'<leader>r', ':Lazy<CR>'}
+
+nmap{'<leader><leader>x', ': source %<CR>'}
 -- opens quickfix list
 nmap{'<localleader>c', ':copen<cr>'}
 -- closes quickfix list
@@ -98,3 +100,11 @@ vim.keymap.set('n', '<localleader>fc', '<CMD>FTermClose<CR>', opts)
 -- LSP related mappings
 -- :Format is an custom user-command. It's basically calling vim.lsp.buf.format()
 vim.keymap.set('n', '<leader>lf', '<CMD>Format<CR>', opts)
+
+
+-- Code runner mappings
+vim.keymap.set('n', '<leader><leader>s', '<CMD>OverseerToggle!<CR>', opts)
+vim.keymap.set('n', '<leader><leader>q', '<CMD>OverseerQuickAction<CR>', opts)
+
+vim.keymap.set('n', '<leader><leader>r', '<CMD>SingleRun<CR>', opts)
+vim.keymap.set('n', '<leader><leader>w', '<CMD>WatchSingleRun<CR>', opts)

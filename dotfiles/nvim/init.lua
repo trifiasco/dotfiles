@@ -45,4 +45,5 @@ require("lazy").setup("plugins")
 -- ================= END: PLUGINS ==================================================
 
 require("config.sets")
+require("config.runner")
 require("config.keymaps")
