@@ -10,11 +10,6 @@ Make sure the following are installed -
 - [tmux](https://github.com/tmux) - terminal multiplexer
 - [tmuxinator](https://github.com/tmuxinator/tmuxinator) - tmux session manager
 - [neovim](https://neovim.io/) - vim improved (> 0.7)
-- [vim](https://www.vim.org/) - vi improved
-- [pyenv](https://github.com/pyenv/pyenv) - better python version and package management
-    - only `brew install pyenv` is enough, shell exports are part of dotfiles.
-- [pyenv](https://github.com/pyenv/pyenv-virtualenv) - better python virtual env management
-    - only `brew install pyenv-virtualenv` is enough, shell exports are part of dotfiles.
 
 # Setting up environment in a new computer
 - Clone the repository - 
@@ -31,4 +26,3 @@ git@github.com:trifiasco/dotfiles.git
 - Add setup scripts for the other dependencies
 - Cleanup - remove dead and obsolete dotfiles
     - .vimrc - not maintained anymore
-- Check nvim related TODOs in [docs/nvim-todos.md](./docs/nvim-todos.md)

@@ -12,6 +12,8 @@
     ~/.config/nvim: dotfiles/nvim
     ~/.config/kitty: dotfiles/kitty
     ~/.config/alacritty/alacritty.yml: dotfiles/alacritty.yml
+    ~/.config/yabai/yabairc: dotfiles/yabai/yabairc
+    ~/.config/skhd/skhdrc: dotfiles/yabai/skhdrc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
