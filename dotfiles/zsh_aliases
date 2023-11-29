@@ -1,0 +1,29 @@
+# Navigation
+alias ..="cd .."
+alias cd..="cd .."
+
+# Shortcuts
+alias cls="clear"
+
+# Get week number
+alias week="date +%V"
+
+# Project related
+alias localstart=""
+
+# Git commands
+alias branch="git checkout -b"
+alias branches="git branch --list"
+alias co="git checkout "
+alias checkout="git checkout "
+alias stash="git stash --include-untracked"
+alias stashes="git stash list"
+alias status="git status"
+alias commit="git add -A && git commit"
+alias amend="git add -A && git commit --amend --no-edit"
+alias force="git push --force"
+alias pull="git pull"
+alias push="git push"
+alias reset_file="git checkout origin/master "
+alias master="git checkout master && git pull"
+alias clean="git branch | grep -v "master" | xargs git branch -D"

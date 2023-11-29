@@ -20,13 +20,16 @@ export EDITOR='nvim'
 
 # Use antigen
 source $HOME/antigen.zsh
+source $HOME/.zsh_aliases
+source $HOME/.zsh_local_aliases
 
 # Use Oh-My-Zsh
 antigen use oh-my-zsh
 
 # Set theme
 # antigen theme robbyrussell
-antigen theme romkatv/powerlevel10k
+THEME=romkatv/powerlevel10k 
+antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
 
 # Set plugins (plugins not part of Oh-My-Zsh can be installed using githubusername/repo)
 antigen bundle git
