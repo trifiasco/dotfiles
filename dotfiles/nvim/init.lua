@@ -6,8 +6,8 @@
 
 -- absolute basics
 -- map leader is required by lazy.nvim
-vim.g.mapleader = ','
-vim.g.maplocalleader = " "
+vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 
 -- @TODO:CHECK
