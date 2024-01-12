@@ -8,16 +8,16 @@ font:
   # fc-list | grep Nerd | grep Hack
   # Style can be specified to pick a specific face.
   normal:
-    family: Hack Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Regular
   # Bold font face
   bold:
-    family: Hack Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Bold
 
   # Italic font face
   italic:
-    family: Hack Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Italic
 
   # Bold italic font face
@@ -25,7 +25,7 @@ font:
   # italic & it just works. You may specifiy the bold italic version if it exists
   # for your font
   bold_italic:
-    family: Hack Nerd Font
+    family: JetBrainsMono Nerd Font
     style: Italic
 
   # Font size
