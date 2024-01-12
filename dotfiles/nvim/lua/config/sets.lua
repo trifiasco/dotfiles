@@ -44,3 +44,5 @@ wo.signcolumn = 'yes'
 
 --- break line when too long
 wo.linebreak = true
+
+vim.g.copilot_assume_mapped = true

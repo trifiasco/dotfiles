@@ -176,4 +176,5 @@ return {
     --
     -- colors and themes
     { "morhetz/gruvbox" },
+    {"github/copilot.vim",}
 }
