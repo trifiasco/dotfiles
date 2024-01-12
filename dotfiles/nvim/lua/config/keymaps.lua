@@ -15,15 +15,15 @@ local map = vim.api.nvim_set_keymap
 -- Things I can't live without
 imap{'kj', '<ESC>'}
 nmap {'<leader>w', ':w!<CR>'}
-nmap{'<localleader>q', ':bd<CR>'}
+nmap{'<leader>q', ':bd!<CR>'}
 
 nmap{'<leader>r', ':Lazy<CR>'}
 
 nmap{'<leader><leader>x', ': source %<CR>'}
 -- opens quickfix list
-nmap{'<localleader>c', ':copen<cr>'}
+nmap{'<leader>c', ':copen<cr>'}
 -- closes quickfix list
-nmap{'<localleader>x', ':cclose<cr>'}
+nmap{'<leader>x', ':cclose<cr>'}
 
 -- toggle highlight last search
 nmap{'<leader>n', ':set hlsearch!<cr>'}
@@ -108,3 +108,5 @@ vim.keymap.set('n', '<leader><leader>q', '<CMD>OverseerQuickAction<CR>', opts)
 
 vim.keymap.set('n', '<leader><leader>r', '<CMD>SingleRun<CR>', opts)
 vim.keymap.set('n', '<leader><leader>w', '<CMD>WatchSingleRun<CR>', opts)
+
+vim.api.nvim_set_keymap("i", "<C-y>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
