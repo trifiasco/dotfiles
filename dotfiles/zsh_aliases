@@ -11,6 +11,10 @@ alias week="date +%V"
 # Project related
 alias localstart=""
 
+alias cat="bat"
+alias grep="rg"
+alias find="fd"
+
 # Git commands
 alias branch="git checkout -b"
 alias branches="git branch --list"
