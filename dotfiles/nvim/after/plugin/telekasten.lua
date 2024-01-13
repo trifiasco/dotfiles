@@ -1,4 +1,4 @@
-local home = vim.fn.expand("~/tbox/notes")
+local home = vim.fn.expand("~/tbox/immigrants/notes")
 
 require('telekasten').setup({
     home                        = home,
