@@ -101,6 +101,14 @@ vim.keymap.set('n', '<localleader>fc', '<CMD>FTermClose<CR>', opts)
 -- :Format is an custom user-command. It's basically calling vim.lsp.buf.format()
 vim.keymap.set('n', '<leader>lf', '<CMD>Format<CR>', opts)
 
+-- Shamelessly copying from primeagen
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
+
+-- delete/paste without overwriting the current register
+vim.keymap.set("x", "<leader>p", [["_dP]])
+vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
+
 
 -- Code runner mappings
 vim.keymap.set('n', '<leader><leader>s', '<CMD>OverseerToggle!<CR>', opts)
