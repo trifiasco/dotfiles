@@ -33,8 +33,6 @@ return {
         config = function()
             require("mini.comment").setup({ options = { ignore_blank_line = true } })
             require("mini.pairs").setup()
-            -- TODO: change keymaps for surround
-            require("mini.surround").setup()
 
             require("mini.indentscope").setup({
                 symbol = "│",
@@ -168,6 +166,7 @@ return {
     -- Git Related
     -- gitsign + lazygit in tmux maybe??
     { "tpope/vim-fugitive" },
+    { "tpope/vim-surround" },
     { "lewis6991/gitsigns.nvim" },
     { "tpope/vim-repeat" },
 
