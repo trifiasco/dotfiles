@@ -58,6 +58,17 @@ end
 --  define the property 'filetypes' to the map in question.
 local servers = {
 	clangd = {},
+    gopls = {
+        filetypes = { "go", "gomod" },
+        settings = {
+            gopls = {
+                analyses = {
+                    unusedparams = true,
+                },
+                staticcheck = true,
+            },
+        },
+    },
 	pyright = {
 		single_file_support = true,
 		settings = {

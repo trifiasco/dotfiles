@@ -15,6 +15,7 @@ local map = vim.api.nvim_set_keymap
 -- Things I can't live without
 imap{'kj', '<ESC>'}
 nmap {'<leader>w', ':w!<CR>'}
+nmap  {';', ':'}
 nmap{'<leader>q', ':bd!<CR>'}
 
 nmap{'<leader>r', ':Lazy<CR>'}
@@ -111,6 +112,29 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 
 -- Code runner mappings
+-- Run types:
+-- 1. SingleRun - run the current file. Determine the language from the file extension
+-- cpp: 
+-- python: venv detection? ipython?
+-- go:
+-- rust:
+-- 2. TestRun - run the test file. Determine the language from the file extension
+-- 3. Generic command run: like localdev.sh, makefile targets etc
+-- Generic considerations:
+-- scratch terminals, tmux panes, scratch buffers, quickfix list
+
+vim.keymap.set('n', '<F8>', '<CMD> !python % <CR>', opts)
+
+-- plain run a single file: <localleader>er
+vim.api.nvim_create_autocmd("FileType", { pattern = "python", command = "nnoremap <buffer> <localleader>er <ESC> :belowright split<CR>:te LOCAL=true python % <CR>" })
+vim.api.nvim_create_autocmd("FileType", { pattern = "rust", command = "nnoremap <buffer> <localleader>er <ESC> :belowright split<CR>:te rustc % && ./%:t:r <CR>" })
+vim.api.nvim_create_autocmd("FileType", { pattern = "cpp", command = "nnoremap <buffer> <localleader>er <ESC> :w <CR> :belowright split<CR>:te g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -o %:t:r % && ./%:t:r <CR>" })
+
+-- plain run a single file reading from a inp file: <localleader>ee
+vim.api.nvim_create_autocmd("FileType", { pattern = "python", command = "nnoremap <buffer> <localleader>ee <ESC> :belowright split<CR>:te LOCAL=true python % < inp <CR>" })
+vim.api.nvim_create_autocmd("FileType", { pattern = "rust", command = "nnoremap <buffer> <localleader>ee <ESC> :belowright split<CR>:te rustc % && ./%:t:r < inp <CR>" })
+vim.api.nvim_create_autocmd("FileType", { pattern = "cpp", command = "nnoremap <buffer> <localleader>ee <ESC> :w <CR> :belowright split<CR>:te g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -o %:t:r % && ./%:t:r < inp <CR>" })
+
 vim.keymap.set('n', '<leader><leader>s', '<CMD>OverseerToggle!<CR>', opts)
 vim.keymap.set('n', '<leader><leader>q', '<CMD>OverseerQuickAction<CR>', opts)
 
