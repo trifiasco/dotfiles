@@ -120,9 +120,10 @@ return {
     -- a. null-ls.nvim or nvim-lint
     -- 2.4 Formatters
     -- a. null-ls.nvim or formatter.nvim
-    {
-        "jose-elias-alvarez/null-ls.nvim",
-    },
+    -- ** now using ruff_lsp formatter
+    -- {
+    --     "jose-elias-alvarez/null-ls.nvim",
+    -- },
     -- 2.5 Completion
     {
         -- Autocompletion

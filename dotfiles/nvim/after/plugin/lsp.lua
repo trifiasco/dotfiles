@@ -73,20 +73,33 @@ local servers = {
 		single_file_support = true,
 		settings = {
 			pyright = {
-				disableLanguageServices = false,
-				disableOrganizeImports = false,
+				-- disableLanguageServices = true,
+				disableOrganizeImports = true,
 			},
 			python = {
 				analysis = {
-					autoImportCompletions = true,
-					autoSearchPaths = true,
-					diagnosticMode = "workspace", -- openFilesOnly, workspace
-					typeCheckingMode = "basic", -- off, basic, strict
-					useLibraryCodeForTypes = true,
+	                   -- using ruff for linting
+	                   ignore = { '*' }
+					-- autoImportCompletions = true,
+					-- autoSearchPaths = true,
+					-- diagnosticMode = "workspace", -- openFilesOnly, workspace
+					-- typeCheckingMode = "basic", -- off, basic, strict
+					-- useLibraryCodeForTypes = true,
 				},
 			},
 		},
 	},
+    ruff_lsp = {
+        cmd = { "ruff-lsp" },
+        filetypes = { "python" },
+        settings = {
+            ruff = {
+                lint = {
+                    enabled = true,
+                },
+            },
+        },
+    },
 	rust_analyzer = {},
 	tsserver = {},
 	lua_ls = {
@@ -106,13 +119,13 @@ local servers = {
 }
 
 -- setup null-ls to handle linting and formatting
-require("null-ls").setup({
-	sources = {
-		require("null-ls").builtins.formatting.stylua,
-		require("null-ls").builtins.formatting.isort,
-		require("null-ls").builtins.formatting.black,
-	},
-})
+-- require("null-ls").setup({
+-- 	sources = {
+-- 		require("null-ls").builtins.formatting.stylua,
+-- 		require("null-ls").builtins.formatting.isort,
+-- 		require("null-ls").builtins.formatting.black,
+-- 	},
+-- })
 
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
