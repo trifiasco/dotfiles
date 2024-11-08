@@ -1,3 +1,4 @@
+
 -- -- [[ Configure LSP ]]
 -- --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
@@ -127,72 +128,85 @@ local servers = {
 -- 	},
 -- })
 
--- nvim-cmp supports additional completion capabilities, so broadcast that to servers
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.foldingRange = {
-	dynamicRegistration = false,
-	lineFoldingOnly = true,
-}
+local config = function()
+    -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
+    local capabilities = vim.lsp.protocol.make_client_capabilities()
+    capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+    capabilities.textDocument.completion.completionItem.snippetSupport = true
+    capabilities.textDocument.foldingRange = {
+        dynamicRegistration = false,
+        lineFoldingOnly = true,
+    }
 
--- Ensure the servers above are installed
-local mason_lspconfig = require("mason-lspconfig")
+    -- Ensure the servers above are installed
+    local mason_lspconfig = require("mason-lspconfig")
 
-mason_lspconfig.setup({
-	ensure_installed = vim.tbl_keys(servers),
-})
+    mason_lspconfig.setup({
+        ensure_installed = vim.tbl_keys(servers),
+    })
 
-local util = require('lspconfig/util')
-local path = util.path
+    local util = require('lspconfig/util')
+    local path = util.path
 
-local function get_python_path(workspace)
-    -- [ref1](https://github.com/neovim/nvim-lspconfig/issues/500)
-    -- [ref2](https://github.com/VonHeikemen/lsp-zero.nvim/issues/195)
+    local function get_python_path(workspace)
+        -- [ref1](https://github.com/neovim/nvim-lspconfig/issues/500)
+        -- [ref2](https://github.com/VonHeikemen/lsp-zero.nvim/issues/195)
 
-    -- Case 01:
-    -- check if there's already an activated virtual env
-    -- from manual activation or pyenv local
-    if vim.env.VIRTUAL_ENV then
-        return path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
+        -- Case 01:
+        -- check if there's already an activated virtual env
+        -- from manual activation or pyenv local
+        if vim.env.VIRTUAL_ENV then
+            return path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
+        end
+
+        -- Case 02:
+        -- we can search the workspace directory for virtual env
+        -- even if it's not activated, we can point pyright to that
+        -- and we will have LSP functionalities without explicitly activating venv
+        -- In fact you can go wild here, like instead of searching workspace you can search a global directory of venvs if that's what you want
+        -- (My current workflow doesn't require this as of now)
+
+        -- Case 03:
+        -- Fallback to system Python.
+      return exepath('python3') or exepath('python') or 'python'
     end
 
-    -- Case 02:
-    -- we can search the workspace directory for virtual env
-    -- even if it's not activated, we can point pyright to that
-    -- and we will have LSP functionalities without explicitly activating venv
-    -- In fact you can go wild here, like instead of searching workspace you can search a global directory of venvs if that's what you want
-    -- (My current workflow doesn't require this as of now)
-
-    -- Case 03:
-    -- Fallback to system Python.
-  return exepath('python3') or exepath('python') or 'python'
+    mason_lspconfig.setup_handlers({
+        function(server_name)
+            require("lspconfig")[server_name].setup({
+                capabilities = capabilities,
+                on_attach = on_attach,
+                settings = servers[server_name],
+                filetypes = (servers[server_name] or {}).filetypes,
+                on_init = function (client)
+                    if server_name == 'pyright' then
+                        -- why and what?
+                        -- pyright doesn't work if you use `pyenv local` to specify auto-activate virtualenv on entering a directory
+                        -- Although if you manually activate the virtual env -> pyright will respect that
+                        -- See [ref](https://github.com/neovim/nvim-lspconfig/issues/717)
+                        --
+                        -- Solution:
+                        -- Option #1: Add pyrightconfig.json with pythonPath, venvPath and venv
+                        -- you can optionally use a [pyenv plugin](https://github.com/alefpereira/pyenv-pyright) to avoid manually managing this
+                        -- Option #2: Hook up correct python path before LSP init
+                        -- what we are doing right now
+                        local python_path = get_python_path(client.config.root_dir)
+                        print(python_path)
+                        client.config.settings.python.pythonPath = get_python_path(client.config.root_dir)
+                    end
+                end
+            })
+        end,
+    })
 end
 
-mason_lspconfig.setup_handlers({
-	function(server_name)
-		require("lspconfig")[server_name].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-			settings = servers[server_name],
-			filetypes = (servers[server_name] or {}).filetypes,
-            on_init = function (client)
-                if server_name == 'pyright' then
-                    -- why and what?
-                    -- pyright doesn't work if you use `pyenv local` to specify auto-activate virtualenv on entering a directory
-                    -- Although if you manually activate the virtual env -> pyright will respect that
-                    -- See [ref](https://github.com/neovim/nvim-lspconfig/issues/717)
-                    --
-                    -- Solution:
-                    -- Option #1: Add pyrightconfig.json with pythonPath, venvPath and venv
-                    -- you can optionally use a [pyenv plugin](https://github.com/alefpereira/pyenv-pyright) to avoid manually managing this
-                    -- Option #2: Hook up correct python path before LSP init
-                    -- what we are doing right now
-                    local python_path = get_python_path(client.config.root_dir)
-                    print(python_path)
-                    client.config.settings.python.pythonPath = get_python_path(client.config.root_dir)
-                end
-            end
-		})
-	end,
-})
+return {
+        -- LSP Configuration & Plugins
+        "neovim/nvim-lspconfig",
+        config = config,
+        dependencies = {
+            -- Automatically install LSPs to stdpath for neovim
+            { "williamboman/mason.nvim", config = true },
+            "williamboman/mason-lspconfig.nvim",
+        },
+    }

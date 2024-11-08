@@ -6,10 +6,12 @@
 -- Note: two ways to setup keymap
 -- vim.keymap.set - default opts = {noremap = true}
 -- vim.api.nvim_set_keymap - no default opts
-local maps = require('utils.maps')
+local maps = require('trifiasco.utils.maps')
 local imap = maps.imap
 local nmap = maps.nmap
-local map = vim.api.nvim_set_keymap
+
+local opts_noremap_silent = { noremap = true, silent = true }
+local opts_noremap = { noremap = true, silent = true }
 
 
 -- Things I can't live without
@@ -18,71 +20,68 @@ nmap {'<leader>w', ':w!<CR>'}
 nmap  {';', ':'}
 nmap{'<leader>q', ':bd!<CR>'}
 
-nmap{'<leader>r', ':Lazy<CR>'}
-
+-- reload stuff that almost never works
+nmap{'<leader>r', ':Lazy reload '}
 nmap{'<leader><leader>x', ': source %<CR>'}
--- opens quickfix list
+
+-- opens/close quickfix list
 nmap{'<leader>c', ':copen<cr>'}
--- closes quickfix list
 nmap{'<leader>x', ':cclose<cr>'}
 
 -- toggle highlight last search
 nmap{'<leader>n', ':set hlsearch!<cr>'}
 
---> Plugins related mappings
 
 --> Navigator - vim-tmux-navigator
-local opts = { noremap = true, silent = true }
-
-vim.keymap.set('n', "<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts)
-vim.keymap.set('n', "<C-k>", "<CMD>lua require('Navigator').up()<CR>", opts)
-vim.keymap.set('n', "<C-l>", "<CMD>lua require('Navigator').right()<CR>", opts)
-vim.keymap.set('n', "<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts)
-vim.keymap.set('n', "<C-\\>", "<CMD>lua require('Navigator').previous()<CR>", opts)
+nmap {"<C-h>", "<CMD>lua require('Navigator').left()<CR>", opts_noremap_silent}
+nmap {"<C-k>", "<CMD>lua require('Navigator').up()<CR>", opts_noremap_silent}
+nmap {"<C-l>", "<CMD>lua require('Navigator').right()<CR>", opts_noremap_silent}
+nmap {"<C-j>", "<CMD>lua require('Navigator').down()<CR>", opts_noremap_silent}
+nmap {"<C-\\>", "<CMD>lua require('Navigator').previous()<CR>", opts_noremap_silent}
 
 -- -- Neotree Keymaps
-vim.api.nvim_set_keymap('n', '<C-n>', '<cmd> Neotree filesystem reveal float toggle<CR>', {noremap = true})
+nmap {"<C-n>", "<cmd> Neotree filesystem reveal float toggle<CR>", opts_noremap}
 
 -- Telescope Keymaps
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>t', builtin.find_files, {})
-vim.keymap.set('n', '<leader>f', builtin.live_grep, {})
-vim.keymap.set('n', '<leader>b', builtin.buffers, {})
-vim.keymap.set('n', '<leader>h', builtin.help_tags, {})
+nmap {'<leader>t', builtin.find_files, {}}
+nmap {'<leader>f', builtin.live_grep, {}}
+nmap {'<leader>b', builtin.buffers, {}}
+nmap {'<leader>h', builtin.help_tags, {}}
 
 
 --> fugitive - git stuff
-vim.keymap.set('n', '<leader>gs', '<CMD> Git<CR>', opts)
-vim.keymap.set('n', '<leader>gb', '<CMD> Git blame<CR>', opts)
-vim.keymap.set('n', '<leader>gv', '<CMD> Gvdiffsplit<CR>', opts)
+nmap {'<leader>gs', '<CMD> Git<CR>', opts_noremap_silent}
+nmap {'<leader>gb', '<CMD> Git blame<CR>', opts_noremap_silent}
+nmap {'<leader>gv', '<CMD> Gvdiffsplit<CR>', opts_noremap_silent}
 -- 
--- vim.keymap.set('n', '<leader>p', [[<cmd>lua require('nabla').popup()<CR>]], opts)
+-- nmap {'<leader>p', [[<cmd>lua require('nabla').popup()<CR>]], opts_noremap_silent}
 -- 
 -- -- telekasten keymaps
-vim.keymap.set('n', '<leader>zf', [[<cmd>lua require('telekasten').find_notes()<CR>]], opts)
-vim.keymap.set('n', '<leader>zd', [[<cmd>lua require('telekasten').find_daily_notes()<CR>]], opts)
-vim.keymap.set('n', '<leader>zw', [[<cmd>lua require('telekasten').find_weekly_notes()<CR>]], opts)
-vim.keymap.set('n', '<leader>zg', [[<cmd>lua require('telekasten').search_notes()<CR>]], opts)
+nmap {'<leader>zf', [[<cmd>lua require('telekasten').find_notes()<CR>]], opts_noremap_silent}
+nmap {'<leader>zd', [[<cmd>lua require('telekasten').find_daily_notes()<CR>]], opts_noremap_silent}
+nmap {'<leader>zw', [[<cmd>lua require('telekasten').find_weekly_notes()<CR>]], opts_noremap_silent}
+nmap {'<leader>zg', [[<cmd>lua require('telekasten').search_notes()<CR>]], opts_noremap_silent}
 
-vim.keymap.set('n', '<leader>zT', [[<cmd>lua require('telekasten').goto_today()<CR>]], opts)
-vim.keymap.set('n', '<leader>zW', [[<cmd>lua require('telekasten').goto_thisweek()<CR>]], opts)
+nmap {'<leader>zT', [[<cmd>lua require('telekasten').goto_today()<CR>]], opts_noremap_silent}
+nmap {'<leader>zW', [[<cmd>lua require('telekasten').goto_thisweek()<CR>]], opts_noremap_silent}
 
-vim.keymap.set('n', '<leader>zn', [[<cmd>lua require('telekasten').new_note()<CR>]], opts)
-vim.keymap.set('n', '<leader>zN', [[<cmd>lua require('telekasten').new_template_note()<CR>]], opts)
+nmap {'<leader>zn', [[<cmd>lua require('telekasten').new_note()<CR>]], opts_noremap_silent}
+nmap {'<leader>zN', [[<cmd>lua require('telekasten').new_template_note()<CR>]], opts_noremap_silent}
 
-vim.keymap.set('n', '<leader>zt', [[<cmd>lua require('telekasten').toggle_todo()<CR>]], opts)
+nmap {'<leader>zt', [[<cmd>lua require('telekasten').toggle_todo()<CR>]], opts_noremap_silent}
 
-vim.keymap.set('n', '<leader>zr', [[<cmd>lua require('telekasten').rename_note()<CR>]], opts)
-vim.keymap.set('n', '<leader>za', [[<cmd>lua require('telekasten').show_tags()<CR>]], opts)
-vim.keymap.set('n', '<leader>zb', [[<cmd>lua require('telekasten').show_backlinks()<CR>]], opts)
-vim.keymap.set('n', '<leader>zF', [[<cmd>lua require('telekasten').find_friends()<CR>]], opts)
-vim.keymap.set('n', '<leader>zz', [[<cmd>lua require('telekasten').follow_link()<CR>]], opts)
+nmap {'<leader>zr', [[<cmd>lua require('telekasten').rename_note()<CR>]], opts_noremap_silent}
+nmap {'<leader>za', [[<cmd>lua require('telekasten').show_tags()<CR>]], opts_noremap_silent}
+nmap {'<leader>zb', [[<cmd>lua require('telekasten').show_backlinks()<CR>]], opts_noremap_silent}
+nmap {'<leader>zF', [[<cmd>lua require('telekasten').find_friends()<CR>]], opts_noremap_silent}
+nmap {'<leader>zz', [[<cmd>lua require('telekasten').follow_link()<CR>]], opts_noremap_silent}
 
-vim.keymap.set('n', '<leader>z', [[<cmd>lua require('telekasten').panel()<CR>]], opts)
+nmap {'<leader>z', [[<cmd>lua require('telekasten').panel()<CR>]], opts_noremap_silent}
 
 
 -- -- Terminal related
-vim.keymap.set('t', '<ESC>', [[<C-\><C-n>]], opts)
+vim.keymap.set('t', '<ESC>', [[<C-\><C-n>]], opts_noremap_silent)
 -- Can directly map to keys, but better to expose the commands as a vim user command
 -- Close Vs Exit: Close doesn't kill the process, Exit does
 vim.api.nvim_create_user_command('FTermOpen', require('FTerm').open, { bang = true })
@@ -90,9 +89,9 @@ vim.api.nvim_create_user_command('FTermClose', require('FTerm').close, { bang = 
 vim.api.nvim_create_user_command('FTermExit', require('FTerm').exit, { bang = true })
 vim.api.nvim_create_user_command('FTermToggle', require('FTerm').toggle, { bang = true })
 --
-vim.keymap.set('n', '<localleader>t', '<CMD>FTermToggle<CR>', opts)
-vim.keymap.set('n', '<localleader>fx', '<CMD>FTermExit<CR>', opts)
-vim.keymap.set('n', '<localleader>fc', '<CMD>FTermClose<CR>', opts)
+nmap {'<localleader>tt', '<CMD>FTermToggle<CR>', opts_noremap_silent}
+nmap {'<localleader>tx', '<CMD>FTermExit<CR>', opts_noremap_silent}
+nmap {'<localleader>tc', '<CMD>FTermClose<CR>', opts_noremap_silent}
 
 -- TODO: scratch terminal for ephimeral build commands. Possibilities are endless
 -- TODO: custom terminal to attach things like btop, lazygit etc.
@@ -100,9 +99,9 @@ vim.keymap.set('n', '<localleader>fc', '<CMD>FTermClose<CR>', opts)
 
 -- LSP related mappings
 -- :Format is an custom user-command. It's basically calling vim.lsp.buf.format()
-vim.keymap.set('n', '<leader>lf', '<CMD>Format<CR>', opts)
+nmap {'<leader>lf', '<CMD>Format<CR>', opts_noremap_silent}
 
--- Shamelessly copying from primeagen
+-- Shamelessly copying from the primeagen
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
@@ -123,7 +122,7 @@ vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 -- Generic considerations:
 -- scratch terminals, tmux panes, scratch buffers, quickfix list
 
-vim.keymap.set('n', '<F8>', '<CMD> !python % <CR>', opts)
+nmap {'<F8>', '<CMD> !python % <CR>', opts}
 
 -- plain run a single file: <localleader>er
 vim.api.nvim_create_autocmd("FileType", { pattern = "python", command = "nnoremap <buffer> <localleader>er <ESC> :belowright split<CR>:te LOCAL=true python % <CR>" })
@@ -135,10 +134,12 @@ vim.api.nvim_create_autocmd("FileType", { pattern = "python", command = "nnorema
 vim.api.nvim_create_autocmd("FileType", { pattern = "rust", command = "nnoremap <buffer> <localleader>ee <ESC> :belowright split<CR>:te rustc % && ./%:t:r < inp <CR>" })
 vim.api.nvim_create_autocmd("FileType", { pattern = "cpp", command = "nnoremap <buffer> <localleader>ee <ESC> :w <CR> :belowright split<CR>:te g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -o %:t:r % && ./%:t:r < inp <CR>" })
 
-vim.keymap.set('n', '<leader><leader>s', '<CMD>OverseerToggle!<CR>', opts)
-vim.keymap.set('n', '<leader><leader>q', '<CMD>OverseerQuickAction<CR>', opts)
+nmap {'<leader><leader>s', '<CMD>OverseerToggle!<CR>', opts}
+nmap {'<leader><leader>q', '<CMD>OverseerQuickAction<CR>', opts}
 
-vim.keymap.set('n', '<leader><leader>r', '<CMD>SingleRun<CR>', opts)
-vim.keymap.set('n', '<leader><leader>w', '<CMD>WatchSingleRun<CR>', opts)
+nmap {'<leader><leader>r', '<CMD>SingleRun<CR>', opts}
+nmap {'<leader><leader>w', '<CMD>WatchSingleRun<CR>', opts}
 
 vim.api.nvim_set_keymap("i", "<C-y>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
+
+

@@ -1,0 +1,43 @@
+local config = function()
+    require("nvim-treesitter.configs").setup({
+        highlight = { enable = true },
+        ensure_installed = {
+            "bash",
+            "c",
+            "html",
+            "javascript",
+            "json",
+            "lua",
+            "luadoc",
+            "luap",
+            "markdown",
+            "markdown_inline",
+            "python",
+            "query",
+            "regex",
+            "rust",
+            "tsx",
+            "typescript",
+            "vim",
+            "vimdoc",
+            "yaml",
+        },
+    })
+
+    local parsers = require("nvim-treesitter.parsers")
+    function _G.ensure_treesitter_language_installed()
+        local lang = parsers.get_buf_lang()
+        if parsers.get_parser_configs()[lang] and not parsers.has_parser(lang) then
+            vim.schedule_wrap(function()
+                vim.cmd("TSInstall " .. lang)
+            end)()
+        end
+    end
+end
+
+return {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = config,
+    event = { "BufReadPost", "BufNewFile" },
+}
