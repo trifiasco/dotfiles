@@ -1,4 +1,3 @@
-
 local home = vim.fn.expand("~/tbox/immigrants/notes")
 
 local config = function()
@@ -111,12 +110,8 @@ local config = function()
         rename_update_links         = true,
     })
 end
+
 return {
-        "nvim-telescope/telescope.nvim",
-        tag = "0.1.8",
-        -- config = config,
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "renerocksai/telekasten.nvim",
-        },
+    "renerocksai/telekasten.nvim",
+    config = config,
 }

@@ -90,8 +90,8 @@ local servers = {
 			},
 		},
 	},
-    ruff_lsp = {
-        cmd = { "ruff-lsp" },
+    ruff = {
+        cmd = { "ruff", "server" },
         filetypes = { "python" },
         settings = {
             ruff = {
@@ -102,7 +102,6 @@ local servers = {
         },
     },
 	rust_analyzer = {},
-	tsserver = {},
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false },
