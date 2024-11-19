@@ -1,6 +1,7 @@
 local config = function()
     require("nvim-treesitter.configs").setup({
         highlight = { enable = true },
+        indent = { enable = true },
         ensure_installed = {
             "bash",
             "c",
@@ -21,6 +22,16 @@ local config = function()
             "vim",
             "vimdoc",
             "yaml",
+            "dockerfile",
+        },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = "<C-space>",
+                node_incremental = "<C-space>",
+                scope_incremental = false,
+                node_decremental = "<bs>",
+            },
         },
     })
 
@@ -40,4 +51,5 @@ return {
     build = ":TSUpdate",
     config = config,
     event = { "BufReadPost", "BufNewFile" },
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 }
