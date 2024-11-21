@@ -23,6 +23,10 @@ local config = function()
             "vimdoc",
             "yaml",
             "dockerfile",
+            "terraform",
+            "sql",
+            "csv",
+            "tsv",
         },
         incremental_selection = {
             enable = true,
