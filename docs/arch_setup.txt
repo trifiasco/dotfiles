@@ -17,7 +17,14 @@ refreshing - sudo pacman -Syyu
     - setup browser
 - dev tool: sudo pacman -S alacritty neovim tmux zsh zsh-completions
     - paru -S antigen-git : better to use the curl from the github repo
-    -
+    - paru -S tmuxinator
+
+# nvidia
+- x should automatically pickup proper drivers
+- install nvidia-settings for GUI experience
+- DONOT DO THIS: 
+    - sudo nvidia-xconfig: this will create the xorg.conf file optimized for nvidia
+- nvidia-smi : this will show the gpu info
 
 # Setup monitor, mouse, keyboard
 
@@ -39,8 +46,7 @@ refreshing - sudo pacman -Syyu
 	ssh -T git@github.com
 	```
 
-7. Install pyenv and pyenvvirtual env
-6. Install nvm
+6. Install nvm: just curl and source .zshrc
   - nvm (node & beyond)
 	- Run following commands in that order
 	```
@@ -52,3 +58,8 @@ refreshing - sudo pacman -Syyu
 	```
 	- download latest node - `nvm install node`
 	- Original [repo](https://github.com/nvm-sh/nvm)
+
+7. Install pyenv and pyenvvirtual env
+    - paru -S pyenv pyenv-virtualenv
+
+8. Install rustup: follow the curl cmd in the official doc
