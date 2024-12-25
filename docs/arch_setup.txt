@@ -1,22 +1,31 @@
 ** if mirrors aren't properly set, or pacman needs
 refreshing - sudo pacman -Syyu
-** gnome-related tweaks:
-	- fix date format
-	- power -> blank screen(never), auto suspend(off)
-1. set up a global keyboard shortcut to launch terminal
-  - give a name
-  - command: gnome-terminal
-  - shortcut: Ctrl+Alt+t
 
-2. vim
-  - pacman -S gvim
-  - gvim comes with clipboard support
 
-3. web browser
-  - install firefox: pacman -S firefox
-  - install qutebrowser: pacman -S qutebrowser
+# Install required packages
+- base devel, clipboard: sudo pacman -S base-devel xsel ripgrep fzf git
+- paru:
+    ```
+    sudo pacman -S --needed base-devel
+    git clone https://aur.archlinux.org/paru.git
+    cd paru
+    makepkg -si
+    ```
+- window manager: sudo pacman -S i3 xrandr
+- nm and bluetooth applet: sudo pacman -S network-manager-applet blueman
+- firefox: pacman -S firefox chromium
+    - setup browser
+- dev tool: sudo pacman -S alacritty neovim tmux zsh zsh-completions
+    - paru -S antigen-git : better to use the curl from the github repo
+    -
 
-4. install git - pacman -S git
+# Setup monitor, mouse, keyboard
+
+# FONTS
+ - sudo pacman -S ttf-jetbrains-mono-nerd
+ - i3: font pango:JetBrainsMono Nerd Font Mono 11
+
+# Setup git
  - set global name and email : global config - `git config --global user.email "mail"` and `git config --global user.name "name"`
 	- clone the dotfiles repository
 	- for ssh - 
@@ -29,59 +38,8 @@ refreshing - sudo pacman -Syyu
 	> test connection
 	ssh -T git@github.com
 	```
-5. Zsh and oh-myzsh:
-	- first install zsh and zsh-completions: `sudo pacman -S
-		zsh zsh-completions`
-		- run `zsh` and enter `1` to go to main config menu
-			- keep the default history options.
-			- keep the default completions system.
-			- change the default keybinding to `vi`
-			- keep the default for number 4(common shell options)
 
-		- move the nvm export lines from `bashrc` if nvm is
-			installed before.
-		- add following to .zshrc - 
-		```
-		autoload -Uz promptinit
-		promptinit
-		```
-		- to persist changes, run - `source .zshrc`
-	- Install `oh-my-zsh`:
-		- run - `sh -c "$(curl -fsSL
-			https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"`
-		- select zsh to default shell
-		- update the OMZ with - `omz update`
-		- change the theme in .zshrc - `gnzh` or `powerlevel10k`
-			- [install powerlevel10k from here](https://github.com/romkatv/powerlevel10k#oh-my-zsh)
-			- add theme in .zshrc -
-				`powerlevel10k/powerlevel10k`
-			- save and source - this will invoke the config
-				prompt.
-		- to enable a plugin check if the plugin exists in the
-			`.oh-my-zsh/plugins` directory, if so add it in the
-			.zshrc plugins line
-
-		- if a plugin is not already installed:
-			- clone the repository into ohmyzsh's plugins
-				directory:
-				```
-					git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-				```
-			- then just add the plugin name in the zshrc plugins
-				line
-			- install `neofetch` - sudo pacman -S neofetch
-			- add neofetch to the top of .zshrc
-
-	- Plugins to install:
-	```
-	git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-
-  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-
-
-plugins=([...] zsh-syntax-highlighting zsh-autosuggestions)
-	```
-
+7. Install pyenv and pyenvvirtual env
 6. Install nvm
   - nvm (node & beyond)
 	- Run following commands in that order
@@ -94,37 +52,3 @@ plugins=([...] zsh-syntax-highlighting zsh-autosuggestions)
 	```
 	- download latest node - `nvm install node`
 	- Original [repo](https://github.com/nvm-sh/nvm)
-
-7. Update vim
-  - clone vim-plug repository
-  - make a .vimrc
-  - copy everything from dotfiles repo vimrc to local vimrc
-  - open vim and :PluginInstall
-	- install silver searcher - `pacman -S the_silver_searcher`
-	- Install a nerd-font to properly show devicons:
-		- go
-			[here](https://github.com/ryanoasis/nerd-fonts#font-installation)
-			and download a font-family from latest release(Hack
-			or Fira code prefereably)
-		- extract the font and place it under
-		`.local/share/fonts`
-		- then from `gnome-tweaks` select the font
-
-
-8. Tmux and Tmuxinator
-	- install tmux : `pacman -S tmux`
-	- copy the .tmux.conf from repo to home directory
-
-	- Now install rvm and ruby (needed for Tmuxinator)-
-		- follow the [arch wiki](https://wiki.archlinux.org/title/RVM#Installing_RVM)
-		```
-			curl -L get.rvm.io > rvm-install
-			bash < ./rvm-install
-		```
-	- enable run command as login shell in
-		terminal>preference>profile>command
-	- close and reopen the terminal and check rvm version
-	- run - `rvm user gemsets`
-	- install a ruby - `rvm install ruby`
-	- make sure $EDITOR is set in .zshrc or .bashrc
-	- run - `gem install tmuxinator`
