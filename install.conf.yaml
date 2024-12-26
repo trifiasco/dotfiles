@@ -13,7 +13,7 @@
     ~/.zsh_funcs: dotfiles/zsh_funcs
     ~/.config/nvim: dotfiles/nvim
     ~/.config/kitty: dotfiles/kitty
-    ~/.config/alacritty/alacritty.yml: dotfiles/alacritty.yml
+    ~/.config/alacritty/alacritty.toml: dotfiles/alacritty.toml
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
