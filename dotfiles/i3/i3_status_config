@@ -1,0 +1,49 @@
+general {
+	colors = true
+	interval = 5
+}
+
+order += "memory"
+order += "cpu_usage"
+order += "load"
+order += "volume master"
+order += "disk /home"
+order += "battery all"
+order += "tztime local"
+
+
+battery all {
+	format = "%status %percentage %remaining"
+
+}
+
+tztime local {
+	format = "%Y-%m-%d %I:%M:%p"
+
+}
+
+load {
+	format = "LOAD:%5min"
+
+}
+
+disk "/home" {
+	format = "%avail"
+
+}
+
+volume master {
+    format = "VOL:%volume "
+    format_muted = " %volume "
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+}
+
+memory {
+    format = "RAM:%used"
+}
+
+cpu_usage {
+    format = "CPU:%usage"
+}
