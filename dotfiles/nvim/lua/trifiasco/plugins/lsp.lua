@@ -101,7 +101,9 @@ local servers = {
             },
         },
     },
-	rust_analyzer = {},
+    -- install rust_analyzer manually from: rustup component add rust-analyzer rustfmt
+    -- don't call setup for rust_analyzer, local rust_analyzer will be picked up automatically by rustacean.nvim
+	-- rust_analyzer = {},
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false },
