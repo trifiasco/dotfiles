@@ -116,19 +116,24 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
+# exec --no-startup-id xrandr --setprovideroutputsource 1 0
+# exec --no-startup-id xrandr --auto
+exec_always --no-startup-id xset r rate 200 30
+
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
-set $externalmonitor HDMI-1-0
-set $laptopmonitor eDP-1
-exec --no-startup-id xrandr --output $externalmonitor --auto --right-of $laptopmonitor
-exec_always --no-startup-id xset r rate 200 30
+
+set $externalmonitor HDMI-0
+set $laptopmonitor eDP-1-0
+# exec --no-startup-id xrandr --auto --output $laptopmonitor --primary --output $externalmonitor --right-of $laptopmonitor
+# exec --no-startup-id xrandr --output $externalmonitor --auto --right-of $laptopmonitor
  
-# set $laptopmonitor 
-workspace 1 output $externalmonitor
-workspace 2 output $externalmonitor
-workspace 3 output $externalmonitor
-workspace 4 output $externalmonitor
-workspace 5 output $externalmonitor
+workspace 1 output $externalmonitor $laptopmonitor
+workspace 2 output $externalmonitor $laptopmonitor
+workspace 3 output $externalmonitor $laptopmonitor
+workspace 4 output $externalmonitor $laptopmonitor
+workspace 5 output $externalmonitor $laptopmonitor
 workspace 6 output $laptopmonitor
 workspace 7 output $laptopmonitor
 workspace 8 output $laptopmonitor
