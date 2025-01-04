@@ -1,0 +1,5 @@
+antigen-git
+paru
+paru-debug
+pyenv-virtualenv
+tmuxinator
