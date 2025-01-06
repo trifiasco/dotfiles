@@ -93,7 +93,7 @@ run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = 'move-node-to-workspace T'
+run = ['layout floating', 'move-node-to-workspace T']
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
