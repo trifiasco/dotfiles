@@ -17,6 +17,7 @@
     ~/.config/i3/config: dotfiles/i3/i3_config
     ~/.config/i3status/config: dotfiles/i3/i3_status_config
     ~/.config/aerospace/aerospace.toml: dotfiles/aerospace.toml
+    ~/.config/zathura/zathurarc: dotfiles/zathurarc
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]

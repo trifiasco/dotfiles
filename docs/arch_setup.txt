@@ -102,3 +102,6 @@ if you have intel/amd integrated graphics
     - paru -S pyenv pyenv-virtualenv
 
 8. Install rustup: follow the curl cmd in the official doc
+9. Install texlive and zathura: sudo pacman -S texlive zathura zathura-pdf-mupdf
+    - make zathura default pdf viewer: xdg-mime default org.pwmt.zathura.desktop application/pdf
+
