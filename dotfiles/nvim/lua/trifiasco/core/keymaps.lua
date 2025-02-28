@@ -140,6 +140,5 @@ nmap {'<leader><leader>q', '<CMD>OverseerQuickAction<CR>', opts}
 nmap {'<leader><leader>r', '<CMD>SingleRun<CR>', opts}
 nmap {'<leader><leader>w', '<CMD>WatchSingleRun<CR>', opts}
 
-vim.api.nvim_set_keymap("i", "<C-y>", 'copilot#Accept("<CR>")', { silent = true, expr = true })
 
 

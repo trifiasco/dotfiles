@@ -53,7 +53,11 @@ vim.opt.rtp:prepend(lazypath)
 -- ================= END: PLUGIN MANAGER SETUP =======================================
 
 -- ================= START: PLUGINS ==================================================
-require("lazy").setup("trifiasco.plugins")
+require("lazy").setup({ import = "trifiasco.plugins" }, {
+  change_detection = {
+    notify = false,
+  },
+})
 -- ================= END: PLUGINS ==================================================
 
 require("trifiasco.core")

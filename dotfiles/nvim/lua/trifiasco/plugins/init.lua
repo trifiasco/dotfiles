@@ -147,6 +147,5 @@ return {
             }
             vim.g.vimtex_compiler_engine = 'xelatex'
         end
-    },
-    {"github/copilot.vim",}
+    }
 }
