@@ -165,8 +165,14 @@ local config = function()
         -- even if it's not activated, we can point pyright to that
         -- and we will have LSP functionalities without explicitly activating venv
         -- In fact you can go wild here, like instead of searching workspace you can search a global directory of venvs if that's what you want
-        -- (My current workflow doesn't require this as of now)
-
+        -- (useful for uv and local venvs)
+        if workspace then
+            local root = util.find_git_ancestor(workspace) or workspace
+            local venv = path.join(root, '.venv')
+            if path.exists(venv) then
+                return path.join(venv, 'bin', 'python')
+            end
+        end
         -- Case 03:
         -- Fallback to system Python.
       return exepath('python3') or exepath('python') or 'python'
