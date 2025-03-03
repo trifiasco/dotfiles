@@ -1,21 +1,6 @@
 
 local config = function()
     require('copilot').setup({
-      panel = {
-        enabled = true,
-        auto_refresh = false,
-        keymap = {
-          jump_prev = "[[",
-          jump_next = "]]",
-          accept = "<CR>",
-          refresh = "gr",
-          open = "<M-CR>"
-        },
-        layout = {
-          position = "bottom", -- | top | left | right | horizontal | vertical
-          ratio = 0.4
-        },
-      },
       suggestion = {
         enabled = true,
         auto_trigger = true,
@@ -24,9 +9,9 @@ local config = function()
         keymap = {
           accept = "<C-y>",
           accept_word = false,
-          accept_line = "<C-l>",
-          next = "<M-]>",
-          prev = "<M-[>",
+          accept_line = false,
+          next = "<C-]>",
+          prev = "<C-[>",
           dismiss = "<C-e>",
         },
       },
