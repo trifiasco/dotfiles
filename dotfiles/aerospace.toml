@@ -57,26 +57,28 @@ preset = 'qwerty'
 #                 See: https://nikitabobko.github.io/AeroSpace/guide#assign-workspaces-to-monitors
 
 [workspace-to-monitor-force-assignment]
-1 = ['27B2', 'built-in'] # left, for browser w
-2 = ['27B2G5', 'built-in'] # middle, for terminal
-3 = ['27B2', 'built-in'] # left, for datagrip
-4 = ['27B2G5', 'built-in'] # middle, for browser p
-5 = 'built-in' # right, for slack
-6 = ['27B2', 'built-in'] # left, misc(excel)
-7 = ['27B2', 'built-in'] # left, misc
-8 = ['built-in'] # right, for docker
-9 = ['built-in'] # right, for activity monitor
-T = ['27B2G5', 'built-in'] # middle, for teams
-E = ['27B2G5', 'built-in'] # middle, for email
-P = ['27B2G5', 'built-in'] # middle, for password manager
+1 = ['27B2G5', '27B2', 'built-in'] # middle first, term
+2 = ['27B2G5', '27B2', 'built-in'] # middle first, browser 2
+3 = ['27B2', '27B2G5', 'built-in'] # left first, browser 1
+4 = ['27B2G5', '27B2', 'built-in'] # middle first, Scratch
+5 = ['27B2', '27B2G5', 'built-in'] # left first, DG
+6 = ['27B2', '27B2G5', 'built-in'] # left first, scratch
+7 = ['27B2', '27B2G5', 'built-in'] # left first, scratch
+T = ['27B2G5', '27B2', 'built-in'] # middle first, teams
+E = ['27B2G5', '27B2', 'built-in'] # middle first, email
+P = ['27B2G5', '27B2', 'built-in'] # middle first, pwm
+S = ['27B2G5', '27B2', 'built-in'] # middle first, scratch
+8 = ['built-in'] # right always, processes
+9 = ['built-in'] # right always
+
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
-run = 'move-node-to-workspace 2'
+run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.ActivityMonitor'
-run = 'move-node-to-workspace 9'
+run = 'move-node-to-workspace 8'
 
 [[on-window-detected]]
 if.app-id = 'com.docker.docker'
@@ -84,12 +86,12 @@ run = 'move-node-to-workspace 8'
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
-run = 'move-node-to-workspace 5'
+run = ['layout floating', 'move-node-to-workspace 9']
 
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.datagrip'
-run = 'move-node-to-workspace 3'
+run = 'move-node-to-workspace 5'
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
@@ -105,7 +107,7 @@ run = 'move-node-to-workspace P'
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Excel'
-run = 'move-node-to-workspace 6'
+run = ['layout floating', 'move-node-to-workspace S']
 
 
 [[on-window-detected]]
