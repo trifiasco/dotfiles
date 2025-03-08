@@ -19,37 +19,25 @@ lazy-lock.json
 - :Lazy reload <plugin_name>
 - :Lazy restore : restore from local lockfile
 
+## Desperately needed
+- markdown preview
+- dbee or dadbod: datagrip is getting too clunky
+
+## AI plugins that I am exploring
+- copilot lua(curently using), need the chat part tho
+- avante.nvim: cursor clone, but too unstable(as of now), but written in rust :P
+- codecompanion: 
+
 # Plugins
-- Existing
-    - FS
-        - neotree
-        - telescope: Include more keymaps
-    - Editor
-        - utils
-            - mini.comment
-            - mini.pairs
-            - mini.indentscope
-            - mini.statusline
-            - surround
-            - repeat
-            - flash.nvim (NEW)
-        - git: replace with neogit
+- Editor
+    - utils
+        - flash.nvim (NEW)
+        - git: replace with neogit(I am still not convinced, fugitive is still my choice)
             - gitsigns
             - fugitive
-        - treesitter
-            - add textobjects
         - LSP
             - replace luasnip
             - replace null-ls
-        - debugger: (NEW)
-        - completion
-        - latex: (FIX)
-        - colorscheme
-            - gruvbox
-    - taskrunner
-        - replace/cleanup overseer
-    - Tumux integration
-        - navigator
     - terminal
         - FTerm
             - usercommand to run jobs
