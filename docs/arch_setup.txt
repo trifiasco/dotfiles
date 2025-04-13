@@ -13,6 +13,7 @@ refreshing - sudo pacman -Syyu
     ```
 - window manager: sudo pacman -S i3 xrandr
 - nm and bluetooth applet: sudo pacman -S network-manager-applet blueman
+- install thunar, gvfs, [udiskie]
 - firefox: pacman -S firefox chromium
     - setup browser
 - dev tool: sudo pacman -S alacritty neovim tmux zsh zsh-completions
