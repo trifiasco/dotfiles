@@ -22,7 +22,6 @@ git@github.com:trifiasco/dotfiles.git
 
 
 # TODOs:
-- Add antigen as a submodule to be automatically installed
-- Add setup scripts for the other dependencies
-- Cleanup - remove dead and obsolete dotfiles
-    - .vimrc - not maintained anymore
+- Migrate to yadm
+    - Add antigen as a submodule to be automatically installed
+    - Add setup scripts for the other dependencies
