@@ -105,14 +105,6 @@ return {
           "mfussenegger/nvim-dap",
         },
       },
-
-    -- task runner
-    -- @TODO: cleanup
-    {
-        "stevearc/overseer.nvim",
-        opts = {},
-    },
-
     { "tpope/vim-fugitive" },
     { "tpope/vim-surround" },
     {

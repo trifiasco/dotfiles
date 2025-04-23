@@ -21,7 +21,7 @@ nmap  {';', ':'}
 nmap{'<leader>q', ':bd!<CR>'}
 
 -- reload stuff that almost never works
-nmap{'<leader>r', ':Lazy reload '}
+-- nmap{'<leader>r', ':Lazy reload '}
 nmap{'<leader><leader>x', ': source %<CR>'}
 
 -- opens/close quickfix list
@@ -133,12 +133,5 @@ vim.api.nvim_create_autocmd("FileType", { pattern = "cpp", command = "nnoremap <
 vim.api.nvim_create_autocmd("FileType", { pattern = "python", command = "nnoremap <buffer> <localleader>ee <ESC> :belowright split<CR>:te LOCAL=true python % < inp <CR>" })
 vim.api.nvim_create_autocmd("FileType", { pattern = "rust", command = "nnoremap <buffer> <localleader>ee <ESC> :belowright split<CR>:te rustc % && ./%:t:r < inp <CR>" })
 vim.api.nvim_create_autocmd("FileType", { pattern = "cpp", command = "nnoremap <buffer> <localleader>ee <ESC> :w <CR> :belowright split<CR>:te g++ -fsanitize=address -std=c++17 -Wall -Wextra -Wshadow -DLOCAL -O2 -o %:t:r % && ./%:t:r < inp <CR>" })
-
-nmap {'<leader><leader>s', '<CMD>OverseerToggle!<CR>', opts}
-nmap {'<leader><leader>q', '<CMD>OverseerQuickAction<CR>', opts}
-
-nmap {'<leader><leader>r', '<CMD>SingleRun<CR>', opts}
-nmap {'<leader><leader>w', '<CMD>WatchSingleRun<CR>', opts}
-
 
 
