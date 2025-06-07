@@ -99,7 +99,19 @@ local servers = {
     },
     -- install rust_analyzer manually from: rustup component add rust-analyzer rustfmt
     -- don't call setup for rust_analyzer, local rust_analyzer will be picked up automatically by rustacean.nvim
-	-- rust_analyzer = {},
+	rust_analyzer = {
+        cmd = { "rust-analyzer" },
+        settings = {
+            ["rust-analyzer"] = {
+                checkOnSave = {
+                    command = "clippy",
+                },
+                cargo = {
+                    allFeatures = true,
+                },
+            },
+        },
+    },
 	lua_ls = {
 		Lua = {
 			workspace = { checkThirdParty = false },
@@ -210,6 +222,6 @@ return {
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
             { "williamboman/mason.nvim", config = true },
-            "williamboman/mason-lspconfig.nvim",
+            {"williamboman/mason-lspconfig.nvim", version = "1.*"},
         },
     }
