@@ -17,6 +17,9 @@ local config = function()
       },
       filetypes = {
         python = true,
+        lua = true,
+        rust = true,
+        sql = true,
         ["*"] = false,
       },
       copilot_node_command = 'node', -- Node.js version must be > 18.x
