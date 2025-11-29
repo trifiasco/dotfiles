@@ -218,6 +218,7 @@ end
 return {
         -- LSP Configuration & Plugins
         "neovim/nvim-lspconfig",
+        version = "1.*",
         config = config,
         dependencies = {
             -- Automatically install LSPs to stdpath for neovim
