@@ -118,7 +118,7 @@ return {
         "lervag/vimtex",
         init = function()
             -- VimTeX configuration goes here, e.g.
-            vim.g.vimtex_view_method = "zathura"
+            -- vim.g.vimtex_view_method = "zathura"
 
             -- xelatex with latexmk for better font support
             vim.g.vimtex_compiler_latexmk = {
