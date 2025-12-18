@@ -58,23 +58,32 @@ preset = 'qwerty'
 
 [workspace-to-monitor-force-assignment]
 1 = ['27B2G5', '27B2', 'built-in'] # middle first, term
+T = ['27B2G5', '27B2', 'built-in'] # middle first, term
+V = ['27B2G5', '27B2', 'built-in'] # middle first, term
+R = ['27B2G5', '27B2', 'built-in'] # middle first, kindle
 2 = ['27B2G5', '27B2', 'built-in'] # middle first, browser 2
 3 = ['27B2', '27B2G5', 'built-in'] # left first, browser 1
+C = ['27B2', '27B2G5', 'built-in'] # left first, browser 1
+F = ['27B2', '27B2G5', 'built-in'] # left first, browser 2
 4 = ['27B2G5', '27B2', 'built-in'] # middle first, Scratch
-5 = ['27B2', '27B2G5', 'built-in'] # left first, DG
+G = ['27B2', '27B2G5', 'built-in'] # left first, DG
 6 = ['27B2', '27B2G5', 'built-in'] # left first, scratch
 7 = ['27B2', '27B2G5', 'built-in'] # left first, scratch
-T = ['27B2G5', '27B2', 'built-in'] # middle first, teams
 E = ['27B2G5', '27B2', 'built-in'] # middle first, email
+W = ['27B2G5', '27B2', 'built-in'] # middle first, browser 3
 P = ['27B2G5', '27B2', 'built-in'] # middle first, pwm
-S = ['27B2G5', '27B2', 'built-in'] # middle first, scratch
+S = ['built-in'] # middle first, scratch
 8 = ['built-in'] # right always, processes
+M = ['built-in'] # right always, ticktick
+O = ['built-in'] # right always, monitor
+D = ['built-in'] # right always, discord
+U = ['built-in'] # right always, utils
 9 = ['built-in'] # right always
 
 
 [[on-window-detected]]
 if.app-id = 'org.alacritty'
-run = 'move-node-to-workspace 1'
+run = 'move-node-to-workspace T'
 
 [[on-window-detected]]
 if.app-id = 'com.apple.ActivityMonitor'
@@ -82,20 +91,36 @@ run = 'move-node-to-workspace 8'
 
 [[on-window-detected]]
 if.app-id = 'com.docker.docker'
-run = 'move-node-to-workspace 8'
+run = 'move-node-to-workspace U'
 
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = ['layout floating', 'move-node-to-workspace 9']
 
+[[on-window-detected]]
+if.app-id = 'com.hnc.Discord'
+run = ['layout floating', 'move-node-to-workspace D']
+
 
 [[on-window-detected]]
 if.app-id = 'com.jetbrains.datagrip'
-run = 'move-node-to-workspace 5'
+run = 'move-node-to-workspace G'
+
+[[on-window-detected]]
+if.app-id = 'com.TickTick.task.mac'
+run = 'move-node-to-workspace M'
+
+[[on-window-detected]]
+if.app-id = 'com.amazon.Lassen'
+run = 'move-node-to-workspace M'
+
+[[on-window-detected]]
+if.app-id = 'com.spotify.client'
+run = 'move-node-to-workspace S'
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
-run = ['layout floating', 'move-node-to-workspace T']
+run = ['layout floating', 'move-node-to-workspace V']
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.Outlook'
