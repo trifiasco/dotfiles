@@ -40,7 +40,7 @@ vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
 -- Code runner mappings
-nmap {'<F8>', '<CMD> !python % <CR>'}
+nmap {'<F8>', '<CMD> !python %:S <CR>'}
 
 -- plain run a single file: <localleader>er
 vim.api.nvim_create_autocmd("FileType", { pattern = "python", command = "nnoremap <buffer> <localleader>er <ESC> :belowright split<CR>:te LOCAL=true python % <CR>" })
