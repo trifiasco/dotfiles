@@ -1,32 +1,5 @@
 return {
     {
-        "nvim-neo-tree/neo-tree.nvim",
-        branch = "v3.x",
-        cmd = "Neotree",
-        keys = {
-            { "<C-n>", "<cmd>Neotree filesystem reveal float toggle<CR>", desc = "Toggle Neo-tree" },
-        },
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",
-            "MunifTanjim/nui.nvim",
-        },
-        opts = {
-            filesystem = {
-                filtered_items = {
-                    visible = true,
-                    show_hidden_count = true,
-                    hide_dotfiles = false,
-                    hide_gitignored = true,
-                    never_show = {
-                        ".DS_Store",
-                        "thumbs.db",
-                    },
-                },
-            },
-        },
-    },
-    {
         "echasnovski/mini.nvim",
         version = "*",
         event = "VeryLazy",
@@ -41,6 +14,9 @@ return {
             })
 
             require("mini.statusline").setup()
+
+            -- replaces vim-surround: sa (add), sd (delete), sr (replace)
+            require("mini.surround").setup()
         end,
     },
     {
@@ -100,10 +76,6 @@ return {
         },
     },
     {
-        "tpope/vim-surround",
-        event = "VeryLazy",
-    },
-    {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPost", "BufNewFile" },
         config = function()
@@ -133,4 +105,6 @@ return {
             vim.g.vimtex_compiler_engine = 'xelatex'
         end,
     },
+    -- devicons (used by snacks explorer)
+    { "nvim-tree/nvim-web-devicons", lazy = true },
 }

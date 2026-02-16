@@ -4,7 +4,6 @@ return {
         "nvim-neotest/nvim-nio",
         "rcarriga/nvim-dap-ui",
         "theHamsta/nvim-dap-virtual-text",
-        "nvim-telescope/telescope-dap.nvim",
     },
     keys = {
         { "<F5>", function() require("dap").continue() end, desc = "DAP Continue" },
@@ -55,9 +54,6 @@ return {
 
         -- Enable virtual text
         require("nvim-dap-virtual-text").setup()
-
-        -- Add Telescope integration
-        require("telescope").load_extension("dap")
 
         -- dap-python specific configuration
         local dap_python = require("dap-python")
