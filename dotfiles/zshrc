@@ -1,88 +1,49 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-export PYENV_ROOT="$HOME/.pyenv"
-command -v pyenv >/dev/null || export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-export PATH="$HOME/.local/bin:$PATH"
-
+# --- 1. Env vars and PATH (instant, no forks) ---
 export EDITOR='nvim'
+export PNPM_HOME="$HOME/Library/pnpm"
 
-# Use antigen
-source $HOME/antigen.zsh
-source $HOME/.zsh_aliases
-source $HOME/.zsh_local_aliases
-source $HOME/.zsh_funcs
+typeset -U path  # auto-deduplicate PATH entries
+path=(
+  "$HOME/.local/bin"
+  "$PNPM_HOME"
+  $path
+)
 
-# Use Oh-My-Zsh
-antigen use oh-my-zsh
+# --- 2. mise — replaces nvm, pyenv, conda (~5ms) ---
+eval "$(mise activate zsh)"
 
-# Set theme
-# antigen theme robbyrussell
-THEME=romkatv/powerlevel10k 
-antigen list | grep $THEME; if [ $? -ne 0 ]; then antigen theme $THEME; fi
+# --- 3. Sheldon — plugin manager (~10ms) ---
+eval "$(sheldon source)"
 
-# Set plugins (plugins not part of Oh-My-Zsh can be installed using githubusername/repo)
-antigen bundle git
-antigen bundle zsh-users/zsh-autosuggestions
-antigen bundle zsh-users/zsh-completions
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle jeffreytse/zsh-vi-mode
+# --- 4. Starship prompt (~20ms) ---
+eval "$(starship init zsh)"
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    antigen bundle macos
+# --- 5. Completions (cached, ~5ms) ---
+# uv/uvx completions pre-cached in fpath (see Phase 4)
+fpath=(~/.local/share/zsh/completions $fpath)
+
+# compinit once per day, skip rebuild check otherwise
+autoload -Uz compinit
+ZSH_COMPDUMP="${ZDOTDIR:-$HOME}/.zcompdump"
+if [[ -n "$ZSH_COMPDUMP"(#qN.mh+24) ]]; then
+  compinit -d "$ZSH_COMPDUMP"
+else
+  compinit -C -d "$ZSH_COMPDUMP"
 fi
+# Compile dump in background for next startup
+{ [[ -s "$ZSH_COMPDUMP" && (! -s "${ZSH_COMPDUMP}.zwc" || "$ZSH_COMPDUMP" -nt "${ZSH_COMPDUMP}.zwc") ]] && zcompile "$ZSH_COMPDUMP" } &!
 
-# vim style keybinding
-bindkey -v
-# Only changing the escape key to `kj` in insert mode, we still
-# keep using the default keybindings `^[` in other modes
-ZVM_VI_INSERT_ESCAPE_BINDKEY=kj
+# --- 6. Source aliases and functions ---
+source "$HOME/.zsh_aliases"
+[[ -f "$HOME/.zsh_local_aliases" ]] && source "$HOME/.zsh_local_aliases"
+source "$HOME/.zsh_funcs"
 
-# Apply changes
-antigen apply
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# --- 7. FZF ---
+source <(fzf --zsh)  # modern fzf integration (replaces sourcing ~/.fzf.zsh)
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --extended'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git --exclude node_modules --exclude .cache'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 
-# pnpm
-export PNPM_HOME="/Users/arnab.roy/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
-
-# uv and uvx completion
-eval "$(uv generate-shell-completion zsh)"
-eval "$(uvx --generate-shell-completion zsh)"
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/trifiasco/miniconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/trifiasco/miniconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/trifiasco/miniconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/trifiasco/miniconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
+# --- 8. Vi mode keybinding ---
+bindkey -v
+bindkey -M viins 'kj' vi-cmd-mode
