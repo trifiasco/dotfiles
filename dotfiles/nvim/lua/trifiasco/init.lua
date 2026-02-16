@@ -9,6 +9,8 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+-- Enable lua module bytecode caching for faster require()
+vim.loader.enable()
 
 -- Disable unused providers
 vim.g.loaded_python3_provider = 0
@@ -18,21 +20,6 @@ vim.g.loaded_node_provider = 0
 
 -- Fallback colorscheme (gruvbox.nvim loads via plugin spec)
 vim.cmd.colorscheme("habamax")
-
--- Disable built-in plugins for faster startup
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrwSettings = 1
-vim.g.loaded_netrwFileHandlers = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_zip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_tutor_mode_plugin = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_matchparen = 1
 
 -- Reload all user config lua modules
 local reload = function()
@@ -65,6 +52,20 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({ import = "trifiasco.plugins" }, {
   change_detection = {
     notify = false,
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "gzip",
+        "matchit",
+        "matchparen",
+        "netrwPlugin",
+        "tarPlugin",
+        "tohtml",
+        "tutor",
+        "zipPlugin",
+      },
+    },
   },
 })
 -- ================= END: PLUGINS ==================================================
