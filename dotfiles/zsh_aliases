@@ -29,10 +29,8 @@ alias force="git push --force"
 alias pull="git pull"
 alias push="git push"
 alias reset_file="git checkout origin/master "
-alias master="git checkout master && git pull"
-alias main="git checkout main && git pull"
-alias clean="git branch | grep -v "master" | xargs git branch -D"
-
+alias main="git checkout main && git pull --rebase origin main"
+alias master="git checkout master && git pull --rebase origin master"
 # Git worktree
 alias gwl="git worktree list"
 alias gwa="git worktree add"
