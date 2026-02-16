@@ -56,6 +56,7 @@ return {
         config = function()
           local debugpy_path = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python"
           require("dap-python").setup(debugpy_path)
+          require("dap-python").test_runner = "pytest"
         end,
     },
     -- Rust
