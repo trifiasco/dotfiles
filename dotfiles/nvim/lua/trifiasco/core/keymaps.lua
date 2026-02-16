@@ -39,23 +39,6 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("x", "<leader>p", [["_dP]])
 vim.keymap.set({"n", "v"}, "<leader>d", [["_d]])
 
--- telekasten keymaps (will be replaced by obsidian.nvim in Phase 4)
-nmap {'<leader>zf', [[<cmd>lua require('telekasten').find_notes()<CR>]], opts_noremap_silent}
-nmap {'<leader>zd', [[<cmd>lua require('telekasten').find_daily_notes()<CR>]], opts_noremap_silent}
-nmap {'<leader>zw', [[<cmd>lua require('telekasten').find_weekly_notes()<CR>]], opts_noremap_silent}
-nmap {'<leader>zg', [[<cmd>lua require('telekasten').search_notes()<CR>]], opts_noremap_silent}
-nmap {'<leader>zT', [[<cmd>lua require('telekasten').goto_today()<CR>]], opts_noremap_silent}
-nmap {'<leader>zW', [[<cmd>lua require('telekasten').goto_thisweek()<CR>]], opts_noremap_silent}
-nmap {'<leader>zn', [[<cmd>lua require('telekasten').new_note()<CR>]], opts_noremap_silent}
-nmap {'<leader>zN', [[<cmd>lua require('telekasten').new_template_note()<CR>]], opts_noremap_silent}
-nmap {'<leader>zt', [[<cmd>lua require('telekasten').toggle_todo()<CR>]], opts_noremap_silent}
-nmap {'<leader>zr', [[<cmd>lua require('telekasten').rename_note()<CR>]], opts_noremap_silent}
-nmap {'<leader>za', [[<cmd>lua require('telekasten').show_tags()<CR>]], opts_noremap_silent}
-nmap {'<leader>zb', [[<cmd>lua require('telekasten').show_backlinks()<CR>]], opts_noremap_silent}
-nmap {'<leader>zF', [[<cmd>lua require('telekasten').find_friends()<CR>]], opts_noremap_silent}
-nmap {'<leader>zz', [[<cmd>lua require('telekasten').follow_link()<CR>]], opts_noremap_silent}
-nmap {'<leader>z', [[<cmd>lua require('telekasten').panel()<CR>]], opts_noremap_silent}
-
 -- Code runner mappings
 nmap {'<F8>', '<CMD> !python % <CR>'}
 
