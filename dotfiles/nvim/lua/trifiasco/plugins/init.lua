@@ -2,9 +2,13 @@ return {
     {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v3.x",
+        cmd = "Neotree",
+        keys = {
+            { "<C-n>", "<cmd>Neotree filesystem reveal float toggle<CR>", desc = "Toggle Neo-tree" },
+        },
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+            "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
         },
         opts = {
@@ -14,7 +18,7 @@ return {
                     show_hidden_count = true,
                     hide_dotfiles = false,
                     hide_gitignored = true,
-                    never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+                    never_show = {
                         ".DS_Store",
                         "thumbs.db",
                     },
@@ -25,6 +29,7 @@ return {
     {
         "echasnovski/mini.nvim",
         version = "*",
+        event = "VeryLazy",
         config = function()
             require("mini.comment").setup({ options = { ignore_blank_line = true } })
             require("mini.pairs").setup()
@@ -40,15 +45,20 @@ return {
     },
     {
         "numToStr/Navigator.nvim",
+        keys = {
+            { "<C-h>", "<CMD>lua require('Navigator').left()<CR>", desc = "Navigate left" },
+            { "<C-j>", "<CMD>lua require('Navigator').down()<CR>", desc = "Navigate down" },
+            { "<C-k>", "<CMD>lua require('Navigator').up()<CR>", desc = "Navigate up" },
+            { "<C-l>", "<CMD>lua require('Navigator').right()<CR>", desc = "Navigate right" },
+            { "<C-\\>", "<CMD>lua require('Navigator').previous()<CR>", desc = "Navigate previous" },
+        },
         config = function()
             require("Navigator").setup()
         end,
     },
     {
         "kevinhwang91/nvim-ufo",
-        opt = true,
-        event = { "BufRead" },
-        wants = { "promise-async" },
+        event = "BufReadPost",
         dependencies = { "kevinhwang91/promise-async" },
         config = function()
             require("ufo").setup({
@@ -60,67 +70,50 @@ return {
             vim.keymap.set("n", "zM", require("ufo").closeAllFolds)
         end,
     },
-
+    -- Python DAP
     {
-        "jose-elias-alvarez/null-ls.nvim",
-    },
-    {
-        "numToStr/FTerm.nvim",
-        config = function()
-            require("FTerm").setup({
-                border = "double",
-                dimensions = {
-                    height = 0.9,
-                    width = 0.9,
-                },
-            })
-        end,
-    },
-    -- DAP
-    {
-        "mfussenegger/nvim-dap",
-        dependencies = {
-          "nvim-neotest/nvim-nio",
-          "rcarriga/nvim-dap-ui",
-          "theHamsta/nvim-dap-virtual-text",
-          "nvim-telescope/telescope-dap.nvim",
-        },
-      },
-      -- Python
-      {
         "mfussenegger/nvim-dap-python",
+        ft = "python",
         dependencies = {
           "mfussenegger/nvim-dap",
         },
         config = function()
-          -- Use mason's debugpy installation
           local debugpy_path = vim.fn.stdpath("data") .. "/mason/packages/debugpy/venv/bin/python"
           require("dap-python").setup(debugpy_path)
-        end
-      },
-      -- Rust
-      {
+        end,
+    },
+    -- Rust
+    {
         "mrcjkb/rustaceanvim",
+        ft = "rust",
         dependencies = {
           "mfussenegger/nvim-dap",
         },
-      },
-    { "tpope/vim-fugitive" },
-    { "tpope/vim-surround" },
+    },
+    {
+        "tpope/vim-fugitive",
+        cmd = { "Git", "Gvdiffsplit", "Gread", "Gwrite" },
+        keys = {
+            { "<leader>gs", "<CMD>Git<CR>", desc = "Git status" },
+            { "<leader>gb", "<CMD>Git blame<CR>", desc = "Git blame" },
+            { "<leader>gv", "<CMD>Gvdiffsplit<CR>", desc = "Git diff split" },
+        },
+    },
+    {
+        "tpope/vim-surround",
+        event = "VeryLazy",
+    },
     {
         "lewis6991/gitsigns.nvim",
+        event = { "BufReadPost", "BufNewFile" },
         config = function()
             require('gitsigns').setup()
         end,
     },
-    { "tpope/vim-repeat" },
     {
         "lervag/vimtex",
+        ft = "tex",
         init = function()
-            -- VimTeX configuration goes here, e.g.
-            -- vim.g.vimtex_view_method = "zathura"
-
-            -- xelatex with latexmk for better font support
             vim.g.vimtex_compiler_latexmk = {
               executable = 'latexmk',
               options = {
@@ -138,6 +131,6 @@ return {
               lualatex = '-lualatex',
             }
             vim.g.vimtex_compiler_engine = 'xelatex'
-        end
-    }
+        end,
+    },
 }
