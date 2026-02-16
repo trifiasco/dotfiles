@@ -55,10 +55,6 @@ return {
         -- Enable virtual text
         require("nvim-dap-virtual-text").setup()
 
-        -- dap-python specific configuration
-        local dap_python = require("dap-python")
-        dap_python.test_runner = "pytest"
-
         -- Automatically open/close DAP UI
         dap.listeners.after.event_initialized["dapui_config"] = function()
             dapui.open()
