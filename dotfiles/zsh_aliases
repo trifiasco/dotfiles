@@ -30,6 +30,18 @@ alias pull="git pull"
 alias push="git push"
 alias reset_file="git checkout origin/master "
 alias master="git checkout master && git pull"
+alias main="git checkout main && git pull"
 alias clean="git branch | grep -v "master" | xargs git branch -D"
+
+# Git worktree
+alias gwl="git worktree list"
+alias gwa="git worktree add"
+alias gwr="git worktree remove"
+
+# GitHub CLI
+alias prc="gh pr create"
+alias prv="gh pr view --web"
+alias prl="gh pr list"
+alias prco="gh pr checkout"
 alias vi="nvim"
 alias vim="nvim"

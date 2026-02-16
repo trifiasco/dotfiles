@@ -67,22 +67,6 @@ return {
         },
     },
     {
-        "tpope/vim-fugitive",
-        cmd = { "Git", "Gvdiffsplit", "Gread", "Gwrite" },
-        keys = {
-            { "<leader>gs", "<CMD>Git<CR>", desc = "Git status" },
-            { "<leader>gb", "<CMD>Git blame<CR>", desc = "Git blame" },
-            { "<leader>gv", "<CMD>Gvdiffsplit<CR>", desc = "Git diff split" },
-        },
-    },
-    {
-        "lewis6991/gitsigns.nvim",
-        event = { "BufReadPost", "BufNewFile" },
-        config = function()
-            require('gitsigns').setup()
-        end,
-    },
-    {
         "lervag/vimtex",
         ft = "tex",
         init = function()
