@@ -37,17 +37,75 @@ local config = function()
                 node_decremental = "<bs>",
             },
         },
+        -- Textobjects (merged from treesitter-textobjects.lua)
+        textobjects = {
+            select = {
+                enable = true,
+                lookahead = true,
+                keymaps = {
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ac"] = "@class.outer",
+                    ["ic"] = "@class.inner",
+                    ["al"] = "@loop.outer",
+                    ["il"] = "@loop.inner",
+                    ["ab"] = "@block.outer",
+                    ["ib"] = "@block.inner",
+                    ["aa"] = "@parameter.outer",
+                    ["ia"] = "@parameter.inner",
+                },
+            },
+            swap = {
+                enable = true,
+                swap_next = {
+                    ["<leader>a"] = "@parameter.inner",
+                },
+                swap_previous = {
+                    ["<leader>A"] = "@parameter.inner",
+                },
+            },
+            move = {
+                enable = true,
+                set_jumps = true,
+                goto_next_start = {
+                    ["]f"] = "@function.outer",
+                    ["]c"] = "@class.outer",
+                    ["]a"] = "@parameter.outer",
+                    ["]i"] = "@conditional.outer",
+                    ["]l"] = "@loop.outer",
+                    ["]b"] = "@block.outer",
+                    ["]s"] = "@statement.outer",
+                },
+                goto_next_end = {
+                    ["]F"] = "@function.outer",
+                    ["]C"] = "@class.outer",
+                    ["]A"] = "@parameter.outer",
+                    ["]I"] = "@conditional.outer",
+                    ["]L"] = "@loop.outer",
+                    ["]B"] = "@block.outer",
+                    ["]S"] = "@statement.outer",
+                },
+                goto_previous_start = {
+                    ["[f"] = "@function.outer",
+                    ["[c"] = "@class.outer",
+                    ["[a"] = "@parameter.outer",
+                    ["[i"] = "@conditional.outer",
+                    ["[l"] = "@loop.outer",
+                    ["[b"] = "@block.outer",
+                    ["[s"] = "@statement.outer",
+                },
+                goto_previous_end = {
+                    ["[F"] = "@function.outer",
+                    ["[C"] = "@class.outer",
+                    ["[A"] = "@parameter.outer",
+                    ["[I"] = "@conditional.outer",
+                    ["[L"] = "@loop.outer",
+                    ["[B"] = "@block.outer",
+                    ["[S"] = "@statement.outer",
+                },
+            },
+        },
     })
-
-    local parsers = require("nvim-treesitter.parsers")
-    function _G.ensure_treesitter_language_installed()
-        local lang = parsers.get_buf_lang()
-        if parsers.get_parser_configs()[lang] and not parsers.has_parser(lang) then
-            vim.schedule_wrap(function()
-                vim.cmd("TSInstall " .. lang)
-            end)()
-        end
-    end
 end
 
 return {
