@@ -1,27 +1,67 @@
 # dotfiles
-Repository containing dotfiles
+Repository containing dotfiles, managed with [dotbot](https://github.com/anishathalye/dotbot).
 
 # Dependencies
-Make sure the following are installed -
-- [git](https://git-scm.com/) - well..
+Make sure the following are installed:
+- [git](https://git-scm.com/)
 - [alacritty](https://github.com/alacritty/alacritty) - terminal emulator
-- [zsh](https://www.zsh.org/) - shell of my choice
-- [antigen](https://github.com/zsh-users/antigen) - zsh plugin manager
+- [zsh](https://www.zsh.org/) - shell
 - [tmux](https://github.com/tmux) - terminal multiplexer
-- [tmuxinator](https://github.com/tmuxinator/tmuxinator) - tmux session manager
-- [neovim](https://neovim.io/) - vim improved (> 0.7)
+- [neovim](https://neovim.io/) - editor (>= 0.7)
+- [mise](https://mise.jdx.dev/) - runtime version manager (replaces nvm, pyenv, conda)
+- [sheldon](https://sheldon.cli.rs/) - zsh plugin manager
+- [starship](https://starship.rs/) - prompt
+- [fzf](https://github.com/junegunn/fzf) - fuzzy finder
+- [fd](https://github.com/sharkdp/fd) - find alternative
+- [bat](https://github.com/sharkdp/bat) - cat alternative
+- [ripgrep](https://github.com/BurntSushi/ripgrep) - grep alternative
 
-# Setting up environment in a new computer
-- Clone the repository - 
+```bash
+brew install mise sheldon starship fzf fd bat ripgrep
 ```
-git@github.com:trifiasco/dotfiles.git
+
+# Setting up environment on a new machine
+
+1. Clone the repository:
+```bash
+git clone git@github.com:trifiasco/dotfiles.git
 ```
-- cd into the repository.
-- run - `./install`
-- tmux and neovim plugins will not be installed outright. but you will be prompted to install the plugins, first time you open tmux/nvim. so chill.
 
+2. Run the installer:
+```bash
+cd dotfiles && ./install
+```
 
-# TODOs:
-- Migrate to yadm
-    - Add antigen as a submodule to be automatically installed
-    - Add setup scripts for the other dependencies
+3. Set up runtime versions with mise:
+```bash
+mise use --global python@3.12
+mise use --global node@22
+```
+
+4. Install sheldon plugins:
+```bash
+sheldon lock
+```
+
+5. Cache uv/uvx completions:
+```bash
+mkdir -p ~/.local/share/zsh/completions
+uv generate-shell-completion zsh > ~/.local/share/zsh/completions/_uv
+uvx --generate-shell-completion zsh > ~/.local/share/zsh/completions/_uvx
+```
+
+6. Open a new terminal. Tmux and neovim plugins will be installed on first launch.
+
+# What's included
+
+| Config | Tool | File |
+|--------|------|------|
+| Shell | zsh | `dotfiles/zshrc` |
+| Aliases | zsh | `dotfiles/zsh_aliases` |
+| Functions | zsh | `dotfiles/zsh_funcs` |
+| Plugins | sheldon | `dotfiles/sheldon/plugins.toml` |
+| Prompt | starship | `dotfiles/starship.toml` |
+| Multiplexer | tmux | `dotfiles/tmux.conf` |
+| Editor | neovim | `dotfiles/nvim/` |
+| Terminal | alacritty | `dotfiles/alacritty.toml` |
+| Window mgmt | aerospace | `dotfiles/aerospace.toml` |
