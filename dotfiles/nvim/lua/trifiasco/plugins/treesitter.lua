@@ -1,10 +1,8 @@
-return {
-    "nvim-treesitter/nvim-treesitter",
-    branch = "main",
-    build = ":TSUpdate",
-    config = function()
-        -- Install parsers (async, runs in background)
-        require("nvim-treesitter").install({
+local config = function()
+    require("nvim-treesitter.configs").setup({
+        highlight = { enable = true },
+        indent = { enable = true },
+        ensure_installed = {
             "bash",
             "c",
             "html",
@@ -29,15 +27,91 @@ return {
             "sql",
             "csv",
             "tsv",
-        })
+        },
+        incremental_selection = {
+            enable = true,
+            keymaps = {
+                init_selection = "<C-space>",
+                node_incremental = "<C-space>",
+                scope_incremental = false,
+                node_decremental = "<bs>",
+            },
+        },
+        -- Textobjects (merged from treesitter-textobjects.lua)
+        textobjects = {
+            select = {
+                enable = true,
+                lookahead = true,
+                keymaps = {
+                    ["af"] = "@function.outer",
+                    ["if"] = "@function.inner",
+                    ["ac"] = "@class.outer",
+                    ["ic"] = "@class.inner",
+                    ["al"] = "@loop.outer",
+                    ["il"] = "@loop.inner",
+                    ["ab"] = "@block.outer",
+                    ["ib"] = "@block.inner",
+                    ["aa"] = "@parameter.outer",
+                    ["ia"] = "@parameter.inner",
+                },
+            },
+            swap = {
+                enable = true,
+                swap_next = {
+                    ["<leader>a"] = "@parameter.inner",
+                },
+                swap_previous = {
+                    ["<leader>A"] = "@parameter.inner",
+                },
+            },
+            move = {
+                enable = true,
+                set_jumps = true,
+                goto_next_start = {
+                    ["]f"] = "@function.outer",
+                    ["]c"] = "@class.outer",
+                    ["]a"] = "@parameter.outer",
+                    ["]i"] = "@conditional.outer",
+                    ["]l"] = "@loop.outer",
+                    ["]b"] = "@block.outer",
+                    ["]s"] = "@statement.outer",
+                },
+                goto_next_end = {
+                    ["]F"] = "@function.outer",
+                    ["]C"] = "@class.outer",
+                    ["]A"] = "@parameter.outer",
+                    ["]I"] = "@conditional.outer",
+                    ["]L"] = "@loop.outer",
+                    ["]B"] = "@block.outer",
+                    ["]S"] = "@statement.outer",
+                },
+                goto_previous_start = {
+                    ["[f"] = "@function.outer",
+                    ["[c"] = "@class.outer",
+                    ["[a"] = "@parameter.outer",
+                    ["[i"] = "@conditional.outer",
+                    ["[l"] = "@loop.outer",
+                    ["[b"] = "@block.outer",
+                    ["[s"] = "@statement.outer",
+                },
+                goto_previous_end = {
+                    ["[F"] = "@function.outer",
+                    ["[C"] = "@class.outer",
+                    ["[A"] = "@parameter.outer",
+                    ["[I"] = "@conditional.outer",
+                    ["[L"] = "@loop.outer",
+                    ["[B"] = "@block.outer",
+                    ["[S"] = "@statement.outer",
+                },
+            },
+        },
+    })
+end
 
-        -- Enable treesitter highlighting and indentation for all filetypes
-        vim.api.nvim_create_autocmd("FileType", {
-            callback = function(ev)
-                if pcall(vim.treesitter.start, ev.buf) then
-                    vim.bo[ev.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-                end
-            end,
-        })
-    end,
+return {
+    "nvim-treesitter/nvim-treesitter",
+    branch = "master",
+    build = ":TSUpdate",
+    config = config,
+    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 }
