@@ -3,29 +3,18 @@ return {
     version = "*",
     lazy = true,
     ft = "markdown",
-    cmd = {
-        "ObsidianToday",
-        "ObsidianDailies",
-        "ObsidianNew",
-        "ObsidianQuickSwitch",
-        "ObsidianSearch",
-        "ObsidianBacklinks",
-        "ObsidianTags",
-        "ObsidianToggleCheckbox",
-        "ObsidianRename",
-        "ObsidianFollowLink",
-    },
+    cmd = { "Obsidian" },
     keys = {
-        { "<leader>zt", "<cmd>ObsidianToday<CR>", desc = "Today's daily note" },
-        { "<leader>zd", "<cmd>ObsidianDailies<CR>", desc = "Daily notes list" },
-        { "<leader>zn", "<cmd>ObsidianNew<CR>", desc = "New note" },
-        { "<leader>zf", "<cmd>ObsidianQuickSwitch<CR>", desc = "Find notes" },
-        { "<leader>zg", "<cmd>ObsidianSearch<CR>", desc = "Search notes" },
-        { "<leader>zb", "<cmd>ObsidianBacklinks<CR>", desc = "Backlinks" },
-        { "<leader>za", "<cmd>ObsidianTags<CR>", desc = "Tags" },
-        { "<leader>zT", "<cmd>ObsidianToggleCheckbox<CR>", desc = "Toggle checkbox" },
-        { "<leader>zr", "<cmd>ObsidianRename<CR>", desc = "Rename note" },
-        { "<leader>zz", "<cmd>ObsidianFollowLink<CR>", desc = "Follow link" },
+        { "<leader>zt", "<cmd>Obsidian today<CR>", desc = "Today's daily note" },
+        { "<leader>zd", "<cmd>Obsidian dailies<CR>", desc = "Daily notes list" },
+        { "<leader>zn", "<cmd>Obsidian new<CR>", desc = "New note" },
+        { "<leader>zf", "<cmd>Obsidian quick_switch<CR>", desc = "Find notes" },
+        { "<leader>zg", "<cmd>Obsidian search<CR>", desc = "Search notes" },
+        { "<leader>zb", "<cmd>Obsidian backlinks<CR>", desc = "Backlinks" },
+        { "<leader>za", "<cmd>Obsidian tags<CR>", desc = "Tags" },
+        { "<leader>zT", "<cmd>Obsidian toggle_checkbox<CR>", desc = "Toggle checkbox" },
+        { "<leader>zr", "<cmd>Obsidian rename<CR>", desc = "Rename note" },
+        { "<leader>zz", "<cmd>Obsidian follow_link<CR>", desc = "Follow link" },
     },
     dependencies = {
         "nvim-lua/plenary.nvim",
@@ -79,7 +68,9 @@ return {
 
         -- Attachments
         attachments = {
-            img_folder = "img",
+            folder = "img",
         },
+
+        legacy_commands = false,
     },
 }
